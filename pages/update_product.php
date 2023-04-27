@@ -1,35 +1,24 @@
-<?php
-include "./connect_db.php";
-?>
-
-<?php
-session_start();
-if ($_SESSION['status_login'] != true) {
-  header('location: login.php');
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <title>
-    Dashboard
+    Edit Product
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
-  <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="./assets/css/soft-ui-dashboard.css" rel="stylesheet" />
+  <link id="pagestyle" href="assets/css/soft-ui-dashboard.css" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -38,16 +27,17 @@ if ($_SESSION['status_login'] != true) {
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
         aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="../pages/dashboard.php">
+      <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html"
+        target="_blank">
         <i class="fas fa-fw fa-shopping-cart"></i>
-        <span class="ms-1 font-weight-bold">XX Online Shop</span>
+        <span class="ms-1 font-weight-bold">Toko Online</span>
       </a>
     </div>
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link  active" href="../pages/dashboard.php">
+          <a class="nav-link  " href="../pages/dashboard.php">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -73,12 +63,12 @@ if ($_SESSION['status_login'] != true) {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/product.php">
+          <a class="nav-link  active" href="../pages/product.php">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink">
-                <title>Toko</title>
+                <title>office</title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
                     <g transform="translate(1716.000000, 291.000000)">
@@ -99,7 +89,7 @@ if ($_SESSION['status_login'] != true) {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/order.php">
+          <a class="nav-link  " href="../pages/histori.php">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -124,7 +114,7 @@ if ($_SESSION['status_login'] != true) {
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Order</span>
+            <span class="nav-link-text ms-1">Histori</span>
           </a>
         </li>
         <li class="nav-item">
@@ -186,7 +176,6 @@ if ($_SESSION['status_login'] != true) {
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
         </li>
-
         <li class="nav-item">
           <a class="nav-link  " href="../pages/logout.php">
             <div
@@ -215,80 +204,85 @@ if ($_SESSION['status_login'] != true) {
         </li>
       </ul>
     </div>
-
-    </div>
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg bg-transparent shadow-none position-absolute px-4 w-100 z-index-2">
-      <div class="container-fluid py-1">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 ps-2 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="text-white opacity-5" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Dashboard</li>
-          </ol>
-          <h6 class="text-white font-weight-bolder ms-2">Dashboard</h6>
-        </nav>
-        <div class="collapse navbar-collapse me-md-0 me-sm-4 mt-sm-0 mt-2" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            </li>
-            </ul>
-            </li>
-            </ul>
-          </div>
-        </div>
-    </nav>
-    <!-- End Navbar -->
-    <div class="container-fluid">
-      <div class="page-header min-height-300 border-radius-xl mt-4"
-        style="background-image: url('./assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
-        <span class="mask bg-gradient-primary opacity-6"></span>
-      </div>
-      <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
-        <div class="row gx-4">
-          <div class="col-auto">
-            <div class="avatar avatar-xl position-relative">
-              <img src="./assets/img/profile.png" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+      <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+      <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Edit Product</li>
+    </ol>
+
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>Edit Product</h6>
+
+
+              <?php
+              include "connect_db.php";
+              $qry_get_product = mysqli_query($conn, "select * from product where id_product = '" . $_GET['id_product'] . "'");
+              $dt_product = mysqli_fetch_array($qry_get_product);
+              ?>
+              <form method="POST" action="../pages/proses_ubah_product.php" enctype="multipart/form-data">
+                <section class="base">
+                  <div class="mb-3">
+                    <input type="hidden" name="id_product" value="<?= $dt_product['id_product'] ?>">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Nama product</label>
+                    <input type="text" name="nama_product" value="<?= $dt_product['nama_product'] ?>" class="form-control">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Deskripsi product</label>
+                    <input type="text" name="deskripsi" value="<?= $dt_product['deskripsi'] ?>" class="form-control">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Harga product</label>
+                    <input type="text" name="harga" value="<?= $dt_product['harga'] ?>" class="form-control">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Foto product</label>
+                    <input type="file" name="file" value="<?= $dt_product['foto_product'] ?>" class="form-control"> <br>
+                  </div>
+                  <div>
+                    <input type="submit" name="simpan" value="Ubah Product" class="btn btn-primary">
+                    <a class="btn btn-warning" href="../pages/product.php">Kembali</a>
+                  </div>
+                </section>
+              </form>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="table-responsive p-0">
+              </div>
             </div>
           </div>
-          <div class="col-auto my-auto">
-            <div class="h-100">
-              <h5 class="mb-1">Welcome back,<?= $_SESSION['name'] ?>!
-              </h5>
-              <p class="mb-0 font-weight-bold text-sm">
-                message
-              </p>
-            </div>
-          </div>
-
-          </a>
-          </li>
-          </ul>
         </div>
       </div>
-    </div>
-    </div>
-    </div>
 
-    <!--   Core JS Files   -->
-    <script src="./assets/js/core/popper.min.js"></script>
-    <script src="./assets/js/core/bootstrap.min.js"></script>
-    <script src="./assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="./assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script>
-      var win = navigator.platform.indexOf('Win') > -1;
-      if (win && document.querySelector('#sidenav-scrollbar')) {
-        var options = {
-          damping: '0.5'
+
+
+
+
+      <!--   Core JS Files   -->
+      <script src="assets/js/core/popper.min.js"></script>
+      <script src="assets/js/core/bootstrap.min.js"></script>
+      <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
+      <script src="assets/js/plugins/smooth-scrollbar.min.js"></script>
+      <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+          var options = {
+            damping: '0.5'
+          }
+          Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
-        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-      }
-    </script>
-    <!-- Github buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="./assets/js/soft-ui-dashboard.min.js"></script>
+      </script>
+      <!-- Github buttons -->
+      <script async defer src="https://buttons.github.io/buttons.js"></script>
+      <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+      <script src="assets/js/soft-ui-dashboard.min.js"></script>
 </body>
 
 </html>

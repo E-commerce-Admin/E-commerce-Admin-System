@@ -1,35 +1,24 @@
-<?php
-include "./connect_db.php";
-?>
-
-<?php
-session_start();
-if ($_SESSION['status_login'] != true) {
-  header('location: login.php');
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <title>
-    Dashboard
+    Admin
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
-  <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="./assets/css/soft-ui-dashboard.css" rel="stylesheet" />
+  <link id="pagestyle" href="assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -38,7 +27,8 @@ if ($_SESSION['status_login'] != true) {
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
         aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="../pages/dashboard.php">
+      <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html"
+        target="_blank">
         <i class="fas fa-fw fa-shopping-cart"></i>
         <span class="ms-1 font-weight-bold">XX Online Shop</span>
       </a>
@@ -47,7 +37,7 @@ if ($_SESSION['status_login'] != true) {
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link  active" href="../pages/dashboard.php">
+          <a class="nav-link  " href="../pages/dashboard.php">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +68,7 @@ if ($_SESSION['status_login'] != true) {
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink">
-                <title>Toko</title>
+                <title>office</title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
                     <g transform="translate(1716.000000, 291.000000)">
@@ -154,7 +144,7 @@ if ($_SESSION['status_login'] != true) {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/admin.php">
+          <a class="nav-link  active" href="../pages/admin.php">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -186,7 +176,6 @@ if ($_SESSION['status_login'] != true) {
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
         </li>
-
         <li class="nav-item">
           <a class="nav-link  " href="../pages/logout.php">
             <div
@@ -213,82 +202,143 @@ if ($_SESSION['status_login'] != true) {
             <span class="nav-link-text ms-1">Logout</span>
           </a>
         </li>
+
       </ul>
     </div>
 
-    </div>
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg bg-transparent shadow-none position-absolute px-4 w-100 z-index-2">
-      <div class="container-fluid py-1">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 ps-2 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="text-white opacity-5" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Dashboard</li>
-          </ol>
-          <h6 class="text-white font-weight-bolder ms-2">Dashboard</h6>
-        </nav>
-        <div class="collapse navbar-collapse me-md-0 me-sm-4 mt-sm-0 mt-2" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            </li>
-            </ul>
-            </li>
-            </ul>
-          </div>
-        </div>
-    </nav>
+
+    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+      <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+      <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Admin</li>
+    </ol>
+
     <!-- End Navbar -->
-    <div class="container-fluid">
-      <div class="page-header min-height-300 border-radius-xl mt-4"
-        style="background-image: url('./assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
-        <span class="mask bg-gradient-primary opacity-6"></span>
-      </div>
-      <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
-        <div class="row gx-4">
-          <div class="col-auto">
-            <div class="avatar avatar-xl position-relative">
-              <img src="./assets/img/profile.png" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
-            </div>
-          </div>
-          <div class="col-auto my-auto">
-            <div class="h-100">
-              <h5 class="mb-1">Welcome back,<?= $_SESSION['name'] ?>!
-              </h5>
-              <p class="mb-0 font-weight-bold text-sm">
-                message
-              </p>
-            </div>
-          </div>
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
 
-          </a>
-          </li>
-          </ul>
+              <h6>Admin</h6>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Add admin
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Add Admin</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form method="POST" action="../pages/process_add_admin.php" enctype="multipart/form-data">
+                        <section class="base">
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Admin ID</label>
+                            <input type="text" name="id_admin" class="form-control">
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Admin Name</label>
+                            <input type="text" name="name" class="form-control">
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Username</label>
+                            <input type="text" name="username" class="form-control">
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Password</label>
+                            <input type="text" name="password" class="form-control">
+                          </div>
+                          <div>
+                            <input type="submit" name="simpan" value="Add Admin" class="btn btn-outline-primary">
+                          </div>
+                        </section>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr class="text-xs font-weight-bold opacity-6">
+                      <th>No</th>
+                      <th class="align-middle text-left">Admin Name</th>
+                      <th class="align-middle text-left">Username</th>
+                      <th class="align-middle text-left">Password</th>
+                      <th class="align-middle text-left">Operation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    include "connect_db.php";
+                    $qry_admin = mysqli_query($conn, "select * from admin");
+                    $no = 0;
+                    while ($data_admin = mysqli_fetch_array($qry_admin)) {
+                      $no++; ?>
+                      <tr class="text-xs font-weight-bold">
+                        <td class="align-middle text-left">
+                          <?= $no ?>
+                        </td>
+                        <td class="align-middle text-left">
+                          <?= $data_admin['name'] ?>
+                        </td>
+                        <td class="align-middle text-left">
+                          <?= $data_admin['username'] ?>
+                        </td>
+                        <td class="align-middle text-left">
+                          <?= $data_admin['password'] ?>
+                        </td>
+                        <td class="text-xs font-weight-bold">
+                          <a class="btn btn-success" href="update_admin.php?id_admin=<?= $data_admin['id'] ?>">Update</a>
+
+                          <a href="delete_admin.php?id_admin=<?= $data_admin['id_admin'] ?>"
+                            onclick="return confirm('Apakah anda yakin menghapus data ini?')"
+                            class="btn btn-danger">Delete</a>
+                        </td>
+                      </tr>
+                      <?php
+                    }
+                    ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    </div>
-    </div>
 
-    <!--   Core JS Files   -->
-    <script src="./assets/js/core/popper.min.js"></script>
-    <script src="./assets/js/core/bootstrap.min.js"></script>
-    <script src="./assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="./assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script>
-      var win = navigator.platform.indexOf('Win') > -1;
-      if (win && document.querySelector('#sidenav-scrollbar')) {
-        var options = {
-          damping: '0.5'
+
+
+
+      <!--   Core JS Files   -->
+      <script src="assets/js/core/popper.min.js"></script>
+      <script src="assets/js/core/bootstrap.min.js"></script>
+      <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
+      <script src="assets/js/plugins/smooth-scrollbar.min.js"></script>
+      <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+          var options = {
+            damping: '0.5'
+          }
+          Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
-        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-      }
-    </script>
-    <!-- Github buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="./assets/js/soft-ui-dashboard.min.js"></script>
+      </script>
+      <!-- Github buttons -->
+      <script async defer src="https://buttons.github.io/buttons.js"></script>
+      <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+      <script src="assets/js/soft-ui-dashboard.min.js"></script>
 </body>
 
 </html>
