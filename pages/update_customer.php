@@ -144,7 +144,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/petugas.php">
+          <a class="nav-link  " href="../pages/admin.php">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -169,7 +169,7 @@
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Petugas</span>
+            <span class="nav-link-text ms-1">Admin</span>
           </a>
         </li>
 
@@ -226,21 +226,36 @@
 
               <?php
               include "connect_db.php";
-              $qry_get_customer = mysqli_query($conn, "select * from customer where id = '" . $_GET['id_customer'] . "'");
+              $qry_get_customer = mysqli_query($conn, "select * from customer where id_customer = '" . $_GET['id_customer'] . "'");
               $dt_customer = mysqli_fetch_array($qry_get_customer);
               ?>
               <form method="POST" action="../pages/process_update_customer.php" enctype="multipart/form-data">
                 <section class="base">
                   <div class="mb-3">
-                    <input type="hidden" name="id" value="<?= $dt_customer['id'] ?>">
+                    <input type="hidden" name="id_customer" value="<?= $dt_customer['id_customer'] ?>">
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Customer Name</label>
                     <input type="text" name="name" value="<?= $dt_customer['name'] ?>" class="form-control">
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Address</label>
+                    <label for="exampleInputEmail1" class="form-label">City</label>
                     <input type="text" name="address_city" value="<?= $dt_customer['address_city'] ?>"
+                      class="form-control">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">District</label>
+                    <input type="text" name="address_district" value="<?= $dt_customer['address_district'] ?>"
+                      class="form-control">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Street</label>
+                    <input type="text" name="address_street" value="<?= $dt_customer['address_street'] ?>"
+                      class="form-control">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">ZIP Code</label>
+                    <input type="text" name="zip_code" value="<?= $dt_customer['zip_code'] ?>"
                       class="form-control">
                   </div>
                   <div class="mb-3">

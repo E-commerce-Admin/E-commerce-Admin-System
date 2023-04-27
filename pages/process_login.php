@@ -13,7 +13,7 @@ if ($_POST) {
             $dt_login = mysqli_fetch_array($qry_login);
             session_start();
             $_SESSION['id'] = $dt_login['id'];
-            $_SESSION['name'] = $dt_login['name'];
+            $_SESSION['name_admin'] = $dt_login['name_admin'];
             $_SESSION['status_login'] = true;
             header("location: ../pages/dashboard.php");
         } else {

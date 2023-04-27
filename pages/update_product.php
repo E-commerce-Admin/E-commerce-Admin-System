@@ -30,7 +30,7 @@
       <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html"
         target="_blank">
         <i class="fas fa-fw fa-shopping-cart"></i>
-        <span class="ms-1 font-weight-bold">Toko Online</span>
+        <span class="ms-1 font-weight-bold">Online Shop</span>
       </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -225,30 +225,30 @@
               $qry_get_product = mysqli_query($conn, "select * from product where id_product = '" . $_GET['id_product'] . "'");
               $dt_product = mysqli_fetch_array($qry_get_product);
               ?>
-              <form method="POST" action="../pages/proses_ubah_product.php" enctype="multipart/form-data">
+              <form method="POST" action="../pages/process_update_product.php" enctype="multipart/form-data">
                 <section class="base">
                   <div class="mb-3">
                     <input type="hidden" name="id_product" value="<?= $dt_product['id_product'] ?>">
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Nama product</label>
-                    <input type="text" name="nama_product" value="<?= $dt_product['nama_product'] ?>" class="form-control">
+                    <label for="exampleInputEmail1" class="form-label">Product name</label>
+                    <input type="text" name="name_product" value="<?= $dt_product['name_product'] ?>" class="form-control">
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Deskripsi product</label>
-                    <input type="text" name="deskripsi" value="<?= $dt_product['deskripsi'] ?>" class="form-control">
+                    <label for="exampleInputEmail1" class="form-label">Product description</label>
+                    <input type="text" name="description" value="<?= $dt_product['description'] ?>" class="form-control">
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Harga product</label>
-                    <input type="text" name="harga" value="<?= $dt_product['harga'] ?>" class="form-control">
+                    <label for="exampleInputEmail1" class="form-label">Product price</label>
+                    <input type="text" name="price" value="<?= $dt_product['price'] ?>" class="form-control">
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Foto product</label>
-                    <input type="file" name="file" value="<?= $dt_product['foto_product'] ?>" class="form-control"> <br>
+                    <label for="exampleInputEmail1" class="form-label">Product photo</label>
+                    <input type="file" name="file" value="<?= $dt_product['product_photo'] ?>" class="form-control"> <br>
                   </div>
                   <div>
-                    <input type="submit" name="simpan" value="Ubah Product" class="btn btn-primary">
-                    <a class="btn btn-warning" href="../pages/product.php">Kembali</a>
+                    <input type="submit" name="simpan" value="Submit" class="btn btn-primary">
+                    <a class="btn btn-warning" href="../pages/product.php">Cancel</a>
                   </div>
                 </section>
               </form>

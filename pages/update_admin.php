@@ -187,14 +187,14 @@
         $qry_get_admin=mysqli_query($conn,"select * from admin where id_admin = '".$_GET['id_admin']."'");
         $dt_admin=mysqli_fetch_array($qry_get_admin);
     ?>
-       <form method="POST" action="../pages/proses_ubah_admin.php" enctype="multipart/form-data">
+       <form method="POST" action="../pages/process_update_admin.php" enctype="multipart/form-data">
                           <section class="base">
                         <div class="mb-3">
                           <input type="hidden" name="id_admin" value= "<?=$dt_admin['id_admin']?>">
                         </div>
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Nama admin</label>
-                           <input type="text" name="nama_admin" value= "<?=$dt_admin['nama_admin']?>" class="form-control">
+                           <input type="text" name="name_admin" value= "<?=$dt_admin['name_admin']?>" class="form-control">
                         </div>
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Username</label>
@@ -204,13 +204,9 @@
                           <label for="exampleInputEmail1" class="form-label">Password</label>
                           <input type="text" name="password" value= "<?=$dt_admin['password']?>" class="form-control">
                         </div>
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Level</label>
-                          <input type="text" name="level" value= "<?=$dt_admin['level']?>" class="form-control">
-                        </div>
                         <div>
-                            <input type="submit" name="simpan" value="Ubah Admin" class="btn btn-primary">
-                            <a class="btn btn-warning" href="../pages/admin.php" >Kembali</a>
+                            <input type="submit" name="simpan" value="Update Admin" class="btn btn-primary">
+                            <a class="btn btn-warning" href="../pages/admin.php" >Cancel</a>
                         </div>
                       </section>
                       </form>

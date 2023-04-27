@@ -244,7 +244,7 @@
                         <section class="base">
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Customer ID</label>
-                            <input type="text" name="id" class="form-control">
+                            <input type="text" name="id_customer" class="form-control">
                           </div>
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Customer Name</label>
@@ -255,11 +255,23 @@
                             <input type="text" name="address_city" class="form-control">
                           </div>
                           <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Address District</label>
+                            <input type="text" name="address_district" class="form-control">
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Address Street</label>
+                            <input type="text" name="address_street" class="form-control">
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">ZIP Code</label>
+                            <input type="text" name="zip_code" class="form-control">
+                          </div>
+                          <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Phone</label>
                             <input type="text" name="phone" class="form-control">
                           </div>
                           <div>
-                            <input type="submit" name="simpan" value="Tambah Customer" class="btn btn-outline-primary">
+                            <input type="submit" name="simpan" value="Add Customer" class="btn btn-outline-primary">
                           </div>
                         </section>
                       </form>
@@ -276,7 +288,7 @@
                     <tr class="text-xs font-weight-bold opacity-6">
                       <th>No</th>
                       <th class="align-middle text-left">Customer Name</th>
-                      <th class="align-middle text-left">Address City</th>
+                      <th class="align-middle text-left">Address</th>
                       <th class="align-middle text-left">Phone</th>
                       <th class="align-middle text-left">Operation</th>
                     </tr>
@@ -290,22 +302,22 @@
                       $no++; ?>
                       <tr class="text-xs font-weight-bold">
                         <td class="align-middle text-left">
-                          <?= $no ?>
+                        <?= $data_customer['id_customer'] ?>
                         </td>
                         <td class="align-middle text-left">
                           <?= $data_customer['name'] ?>
                         </td>
                         <td class="align-middle text-left">
-                          <?= $data_customer['address_city'] ?>
+                          <?= $data_customer['address_city'] ?> City, <?= $data_customer['address_district'] ?>, <?= $data_customer['address_street'] ?>, <?= $data_customer['zip_code'] ?>
                         </td>
                         <td class="align-middle text-left">
                           <?= $data_customer['phone'] ?>
                         </td>
                         <td class="text-xs font-weight-bold">
                           <a class="btn btn-success"
-                            href="update_customer.php?id_customer=<?= $data_customer['id'] ?>">Update</a>
+                            href="update_customer.php?id_customer=<?= $data_customer['id_customer'] ?>">Update</a>
 
-                          <a href="delete_customer.php?id_customer=<?= $data_customer['id'] ?>"
+                          <a href="delete_customer.php?id_customer=<?= $data_customer['id_customer'] ?>"
                             onclick="return confirm('Are you sure you delete this data?')"
                             class="btn btn-danger">Delete</a>
                         </td>

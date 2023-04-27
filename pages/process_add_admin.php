@@ -1,31 +1,30 @@
 <?php
 if ($_POST) {
-    $id_petugas = $_POST['id_petugas'];
-    $nama_petugas = $_POST['nama_petugas'];
+    $id_admin = $_POST['id_admin'];
+    $name_admin = $_POST['name_admin'];
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $level = $_POST['level'];
 
-    if (empty($id_petugas)) {
-        echo "<script>alert('id petugas tidak boleh
-    kosong');location.href='../pages/petugas.php';</script>";
-    } elseif (empty($nama_petugas)) {
-        echo "<script>alert('nama petugas tidak boleh
-    kosong');location.href='../pages/petugas.php';</script>";
+    if (empty($id_admin)) {
+        echo "<script>alert('id admin must not
+    empty');location.href='../pages/admin.php';</script>";
+    } elseif (empty($name_admin)) {
+        echo "<script>alert('nama admin must not
+        empty');location.href='../pages/admin.php';</script>";
     } elseif (empty($username)) {
-        echo "<script>alert('username tidak boleh
-    kosong');location.href='../pages/petugas.php';</script>";
+        echo "<script>alert('username must not
+        empty');location.href='../pages/admin.php';</script>";
     } else {
         include "connect_db.php";
-        $insert = mysqli_query($conn, "insert into petugas
-    (id_petugas,nama_petugas, username, password, level)
+        $insert = mysqli_query($conn, "insert into admin
+    (id_admin,name_admin, username, password)
     value
-    ('" . $id_petugas . "','" . $nama_petugas . "','" . $username . "','" . $password . "','" . $level . "')") or
+    ('" . $id_admin . "','" . $name_admin . "','" . $username . "','" . $password . "')") or
             die(mysqli_error($conn));
         if ($insert) {
-            echo "<script>alert('Sukses menambahkan petugas');location.href='../pages/petugas.php';</script>";
+            echo "<script>alert('Success add admin');location.href='../pages/admin.php';</script>";
         } else {
-            echo "<script>alert('Gagal menambahkan petugas');location.href='../pages/petugas.php';</script>";
+            echo "<script>alert('Failed add admin');location.href='../pages/admin.php';</script>";
         }
     }
 }

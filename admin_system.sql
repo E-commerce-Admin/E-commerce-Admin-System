@@ -1,43 +1,43 @@
 CREATE TABLE `order` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_order` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `subtotal` int(11) NOT NULL,
   `order_date` date NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id_order`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;
 
 CREATE TABLE `customer` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_customer` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `address_city` varchar(100) DEFAULT NULL,
   `address_district` varchar(100) DEFAULT NULL,
   `address_street` varchar(100) DEFAULT NULL,
   `zip_code` varchar(50) DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id_customer`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;
 
 CREATE TABLE `product` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
+  `id_product` int(11) NOT NULL AUTO_INCREMENT,
+  `name_product` varchar(100) NOT NULL,
   `description` text NOT NULL,
   `price` int(11) NOT NULL,
   `product_photo` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id_product`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;
 
 CREATE TABLE `admin` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) DEFAULT NULL,
+  `id_admin` int(11) NOT NULL AUTO_INCREMENT,
+  `name_admin` varchar(100) DEFAULT NULL,
   `username` varchar(100) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id_admin`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=5262;
 
 
-INSERT INTO `order` (id, customer_id, product_id, quantity, subtotal, order_date) VALUES
+INSERT INTO `order` (id_order, customer_id, product_id, quantity, subtotal, order_date) VALUES
 (53, 123, 1, 1, 25, '2023-04-15'),
 (54, 123, 2, 1, 50, '2023-04-15'),
 (55, 123, 1, 2, 50, '2023-04-15'),
@@ -64,19 +64,19 @@ INSERT INTO `order` (id, customer_id, product_id, quantity, subtotal, order_date
 (76, 888, 4, 2, 550, '2023-04-27');
 
 
-INSERT INTO `customer` (id, name, address_city, address_district, address_street, zip_code, phone) VALUES
+INSERT INTO `customer` (id_customer, name, address_city, address_district, address_street, zip_code, phone) VALUES
 (123, 'Dummy Name', 'Suzhou', 'Suzhou Industrial Park', 'Renai Road No. 111', '215000', '13966666666'),
 (165, 'Another Dummy Name', 'Suzhou', 'Suzhou Industrial Park', 'Renai Road No. 111', '215000', '15266666666'),
 (521, 'Fasdhagj Sdwuif', 'Shanghai', 'Huangpu District', 'xxxx', '200001', '081671829017'),
 (888, 'Asff Sfreas', 'Shanghai', 'Huangpu District', 'xxxxx', '200001', '081671829017');
 
-INSERT INTO `product` (id, name, description, price, product_photo) VALUES
+INSERT INTO `product` (id_product, name_product, description, price, product_photo) VALUES
 (1, 'product1', 'description', 25, 'panarybody.jpg'),
 (2, 'product2', 'description', 50, 'ortuseight.jpg'),
 (3, 'product3', 'description', 200, 'pvn.jpg'),
 (4, 'product4', 'description', 275, 'mayonette.jpg');
 
-INSERT INTO `admin` (id, name, username, password) VALUES
+INSERT INTO `admin` (id_admin, name_admin, username, password) VALUES
 (1, 'real name', 'admin1', '123456'),
 (2, 'xx xxx', 'xxx', 'password'),
 (3, 'xxx xxxx', 'admin2', '123456'),

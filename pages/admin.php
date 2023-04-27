@@ -246,7 +246,7 @@
                           </div>
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Admin Name</label>
-                            <input type="text" name="name" class="form-control">
+                            <input type="text" name="name_admin" class="form-control">
                           </div>
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Username</label>
@@ -257,7 +257,7 @@
                             <input type="text" name="password" class="form-control">
                           </div>
                           <div>
-                            <input type="submit" name="simpan" value="Add Admin" class="btn btn-outline-primary">
+                            <input type="submit" name="save" value="Add Admin" class="btn btn-outline-primary">
                           </div>
                         </section>
                       </form>
@@ -288,10 +288,10 @@
                       $no++; ?>
                       <tr class="text-xs font-weight-bold">
                         <td class="align-middle text-left">
-                          <?= $no ?>
+                        <?= $data_admin['id_admin'] ?>
                         </td>
                         <td class="align-middle text-left">
-                          <?= $data_admin['name'] ?>
+                          <?= $data_admin['name_admin'] ?>
                         </td>
                         <td class="align-middle text-left">
                           <?= $data_admin['username'] ?>
@@ -300,10 +300,10 @@
                           <?= $data_admin['password'] ?>
                         </td>
                         <td class="text-xs font-weight-bold">
-                          <a class="btn btn-success" href="update_admin.php?id_admin=<?= $data_admin['id'] ?>">Update</a>
+                          <a class="btn btn-success" href="update_admin.php?id_admin=<?= $data_admin['id_admin'] ?>">Update</a>
 
                           <a href="delete_admin.php?id_admin=<?= $data_admin['id_admin'] ?>"
-                            onclick="return confirm('Apakah anda yakin menghapus data ini?')"
+                            onclick="return confirm('Are you sure about deleting this data?')"
                             class="btn btn-danger">Delete</a>
                         </td>
                       </tr>

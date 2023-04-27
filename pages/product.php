@@ -247,19 +247,19 @@ if ($_SESSION['status_login'] != true) {
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <form method="POST" action="../pages/proses_add_product.php" enctype="multipart/form-data">
+                      <form method="POST" action="../pages/process_add_product.php" enctype="multipart/form-data">
                         <section class="base">
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Product ID</label>
-                            <input type="text" name="id" class="form-control">
+                            <input type="text" name="id_product" class="form-control">
                           </div>
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Product Name</label>
-                            <input type="text" name="name" class="form-control">
+                            <input type="text" name="name_product" class="form-control">
                           </div>
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Product Description</label>
-                            <input type="text" name="description class="form-control">
+                            <input type="text" name="description" class="form-control">
                           </div>
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Product Price</label>
@@ -305,7 +305,7 @@ if ($_SESSION['status_login'] != true) {
                           <?= $no ?>
                         </td>
                         <td class="align-middle text-left">
-                          <?= $data_product['name'] ?>
+                          <?= $data_product['name_product'] ?>
                         </td>
                         <td class="align-middle text-left">
                           <?= $data_product['description'] ?>
@@ -316,9 +316,9 @@ if ($_SESSION['status_login'] != true) {
                         <td><img src="assets/product_photo/<?= $data_product['product_photo'] ?>" width="100px" ;></td>
                         <td class="text-xs font-weight-bold">
                           <a class="btn btn-success"
-                            href="update_product.php?id_product=<?= $data_product['id'] ?>">Update</a>
+                            href="update_product.php?id_product=<?= $data_product['id_product'] ?>">Update</a>
 
-                          <a href="delete_product.php?id_product=<?= $data_product['id'] ?>"
+                          <a href="delete_product.php?id_product=<?= $data_product['id_product'] ?>"
                             onclick="return confirm('Are you sure you delete this data?')"
                             class="btn btn-danger">Delete</a>
                         </td>

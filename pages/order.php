@@ -235,7 +235,7 @@
                       <th class="align-middle text-left">Order Date</th>
                       <th class="align-middle text-left">Product Name</th>
                       <th class="align-middle text-left">Product Photo</th>
-                      <th class="align-middle text-left">Product ID</th>
+                      <th class="align-middle text-left">Customer ID</th>
                       <th class="align-middle text-left">Price</th>
                       <th class="align-middle text-left">Subtotal</th>
                     </tr>
@@ -244,10 +244,10 @@
                     <?php
                     include 'connect_db.php';
 
-                    $qry_order = mysqli_query($conn, "SELECT `order`.id, `order`.order_date, product.name AS product_name, product.product_photo, `order`.product_id, product.price, `order`.quantity, `order`.subtotal
+                    $qry_order = mysqli_query($conn, "SELECT `order`.id_order, `order`.order_date, product.name_product AS product_name, product.product_photo, `order`.customer_id, product.price, `order`.quantity, `order`.subtotal
                                   FROM `order`
-                                  JOIN product ON `order`.product_id = product.id
-                                  ORDER BY `order`.id DESC;");
+                                  JOIN product ON `order`.product_id = product.id_product
+                                  ORDER BY `order`.id_order DESC;");
                     if (!$qry_order) {
                       die("Query failed: " . mysqli_error($conn));
                     }
@@ -259,7 +259,7 @@
                         ?>
                         <tr class="text-xs font-weight-bold">
                           <td class="align-middle text-left">
-                            <?= $no ?>
+                          <?= $dt_order['id_order'] ?>
                           </td>
                           <td class="align-middle text-left">
                             <?= $dt_order['order_date'] ?>
@@ -269,7 +269,7 @@
                           </td>
                           <td><img src="assets/product_photo/<?= $dt_order['product_photo'] ?>" width="100px"></td>
                           <td class="align-middle text-left">
-                            <?= $dt_order['product_id'] ?>
+                            <?= $dt_order['customer_id'] ?>
                           </td>
                           <td class="align-middle text-left">
                             <?= $dt_order['price'] ?>
