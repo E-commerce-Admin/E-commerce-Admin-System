@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- 主机： 127.0.0.1
--- 生成日期： 2023-04-30 14:18:23
+-- 主机�?127.0.0.1
+-- 生成日期�?2023-04-30 14:18:23
 -- 服务器版本： 10.4.27-MariaDB
--- PHP 版本： 8.2.0
+-- PHP 版本�?8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,9 +31,9 @@ CREATE TABLE `category` (
   `id_category` bigint(20) NOT NULL COMMENT 'ID',
   `is_delete` tinyint(1) DEFAULT 0 COMMENT '是否删除',
   `NAME` varchar(255) NOT NULL COMMENT '名字',
-  `creator` bigint(20) NOT NULL COMMENT '创建者',
-  `creator_name` varchar(20) NOT NULL COMMENT '创建者姓名',
-  `introduction` tinytext DEFAULT NULL COMMENT '简介'
+  `creator` bigint(20) NOT NULL COMMENT '创建�?,
+  `creator_name` varchar(20) NOT NULL COMMENT '创建者姓�?,
+  `introduction` tinytext DEFAULT NULL COMMENT '简�?
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='分类';
 
 -- --------------------------------------------------------
@@ -66,11 +66,11 @@ CREATE TABLE `orders` (
   `id_product` bigint(20) DEFAULT NULL COMMENT 'productID',
   `user_name` varchar(255) DEFAULT NULL COMMENT 'userName',
   `product_name` varchar(255) DEFAULT NULL COMMENT 'productName',
-  `status` tinyint(4) DEFAULT NULL COMMENT '请求状态',
+  `status` tinyint(4) DEFAULT NULL COMMENT '请求状�?,
   `price` bigint(20) DEFAULT NULL COMMENT '价格',
-  `subtotal` bigint(20) DEFAULT NULL COMMENT '价格总量？原表内容',
+  `subtotal` bigint(20) DEFAULT NULL COMMENT '价格总量？原表内�?,
   `quantity` int(11) NOT NULL COMMENT '数量',
-  `coupon` bigint(20) DEFAULT -1 COMMENT '用的优惠卷，没用默认为-1',
+  `coupon` bigint(20) DEFAULT -1 COMMENT '用的优惠卷，没用默认�?1',
   `is_delete` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否删除',
   `shipping_address` varchar(255) DEFAULT NULL COMMENT '地址',
   `create_time` timestamp NULL DEFAULT current_timestamp() COMMENT '创建时间',
@@ -108,7 +108,7 @@ CREATE TABLE `user` (
   `is_delete` tinyint(1) DEFAULT 0 COMMENT '是否删除',
   `username` varchar(20) NOT NULL COMMENT '名字',
   `mail` varchar(255) DEFAULT NULL COMMENT '邮箱',
-  `phone_number` varchar(20) DEFAULT NULL COMMENT '电话号',
+  `phone_number` varchar(20) DEFAULT NULL COMMENT '电话�?,
   `authority` tinyint(4) DEFAULT NULL COMMENT '权限',
   `user_photo` varchar(256) NOT NULL,
   `password` varchar(128) DEFAULT NULL COMMENT '密码',
@@ -135,7 +135,7 @@ CREATE TABLE `user_address` (
 --
 
 CREATE TABLE `user_product` (
-  `id` bigint(20) NOT NULL COMMENT '主键id',
+  `id_user_product` bigint(20) NOT NULL COMMENT '主键id',
   `introduction` text DEFAULT NULL COMMENT '介绍',
   `id_user` bigint(20) DEFAULT NULL COMMENT '用户ID',
   `id_product` bigint(20) DEFAULT NULL COMMENT 'productID',
@@ -200,7 +200,7 @@ ALTER TABLE `user_address`
 -- 表的索引 `user_product`
 --
 ALTER TABLE `user_product`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id_user_product`),
   ADD KEY `user_product_index` (`id_user`) USING BTREE,
   ADD KEY `products_id13233` (`id_product`);
 
