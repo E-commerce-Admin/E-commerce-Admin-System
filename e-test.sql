@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `category` (
-  `id` bigint(20) NOT NULL COMMENT 'ID',
+  `id_category` bigint(20) NOT NULL COMMENT 'ID',
   `is_delete` tinyint(1) DEFAULT 0 COMMENT '是否删除',
   `NAME` varchar(255) NOT NULL COMMENT '名字',
   `creator` bigint(20) NOT NULL COMMENT '创建者',
@@ -43,9 +43,9 @@ CREATE TABLE `category` (
 --
 
 CREATE TABLE `coupon` (
-  `id` bigint(20) NOT NULL COMMENT '主键id',
-  `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
-  `product_id` bigint(20) DEFAULT NULL COMMENT 'productID',
+  `id_coupon` bigint(20) NOT NULL COMMENT '主键id',
+  `id_user` bigint(20) DEFAULT NULL COMMENT '用户ID',
+  `id_product` bigint(20) DEFAULT NULL COMMENT 'productID',
   `coupon_name` varchar(255) DEFAULT NULL COMMENT 'coupon_name',
   `price` bigint(20) DEFAULT NULL COMMENT '价格',
   `discount` bigint(20) DEFAULT NULL COMMENT 'jiangjia',
@@ -61,9 +61,9 @@ CREATE TABLE `coupon` (
 --
 
 CREATE TABLE `orders` (
-  `id` bigint(20) NOT NULL COMMENT '主键id',
-  `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
-  `product_id` bigint(20) DEFAULT NULL COMMENT 'productID',
+  `id_order` bigint(20) NOT NULL COMMENT '主键id',
+  `id_user` bigint(20) DEFAULT NULL COMMENT '用户ID',
+  `id_product` bigint(20) DEFAULT NULL COMMENT 'productID',
   `user_name` varchar(255) DEFAULT NULL COMMENT 'userName',
   `product_name` varchar(255) DEFAULT NULL COMMENT 'productName',
   `status` tinyint(4) DEFAULT NULL COMMENT '请求状态',
@@ -93,7 +93,7 @@ CREATE TABLE `product` (
   `description` text DEFAULT NULL COMMENT '介绍',
   `category_name` varchar(255) DEFAULT '',
   `product_photo` varchar(256) NOT NULL,
-  `category_id` bigint(20) NOT NULL COMMENT '分类ID',
+  `id_category` bigint(20) NOT NULL COMMENT '分类ID',
   `price` bigint(20) DEFAULT NULL COMMENT '价格'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='商品';
 
@@ -104,7 +104,7 @@ CREATE TABLE `product` (
 --
 
 CREATE TABLE `user` (
-  `id` bigint(20) NOT NULL COMMENT 'ID',
+  `id_user` bigint(20) NOT NULL COMMENT 'ID',
   `is_delete` tinyint(1) DEFAULT 0 COMMENT '是否删除',
   `username` varchar(20) NOT NULL COMMENT '名字',
   `mail` varchar(255) DEFAULT NULL COMMENT '邮箱',
@@ -122,7 +122,7 @@ CREATE TABLE `user` (
 --
 
 CREATE TABLE `user_address` (
-  `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
+  `id_user` bigint(20) DEFAULT NULL COMMENT '用户ID',
   `shipping_address` varchar(255) DEFAULT NULL COMMENT '地址',
   `create_time` timestamp NULL DEFAULT current_timestamp() COMMENT '创建时间',
   `id` bigint(20) NOT NULL COMMENT '主键id'
@@ -137,8 +137,8 @@ CREATE TABLE `user_address` (
 CREATE TABLE `user_product` (
   `id` bigint(20) NOT NULL COMMENT '主键id',
   `introduction` text DEFAULT NULL COMMENT '介绍',
-  `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
-  `product_id` bigint(20) DEFAULT NULL COMMENT 'productID',
+  `id_user` bigint(20) DEFAULT NULL COMMENT '用户ID',
+  `id_product` bigint(20) DEFAULT NULL COMMENT 'productID',
   `is_delete` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否删除',
   `is_collect` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否收藏',
   `user_type` tinyint(1) NOT NULL DEFAULT 0 COMMENT '顾客还是商家',
@@ -153,25 +153,25 @@ CREATE TABLE `user_product` (
 -- 表的索引 `category`
 --
 ALTER TABLE `category`
-  ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD UNIQUE KEY `categories_id_uindex` (`id`),
+  ADD PRIMARY KEY (`id_category`) USING BTREE,
+  ADD UNIQUE KEY `categories_id_uindex` (`id_category`),
   ADD KEY `userkey` (`creator`) USING BTREE;
 
 --
 -- 表的索引 `coupon`
 --
 ALTER TABLE `coupon`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_product_index` (`user_id`) USING BTREE,
-  ADD KEY `products_id1213` (`product_id`);
+  ADD PRIMARY KEY (`id_coupon`),
+  ADD KEY `user_product_index` (`id_user`) USING BTREE,
+  ADD KEY `products_id1213` (`id_product`);
 
 --
 -- 表的索引 `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_product_index` (`user_id`) USING BTREE,
-  ADD KEY `products_id1323` (`product_id`),
+  ADD PRIMARY KEY (`id_order`),
+  ADD KEY `user_product_index` (`id_user`) USING BTREE,
+  ADD KEY `products_id1323` (`id_product`),
   ADD KEY `coupons_id1323` (`coupon`);
 
 --
@@ -179,30 +179,30 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id_product`) USING BTREE,
-  ADD KEY `categories_` (`category_id`);
+  ADD KEY `categories_` (`id_category`);
 
 --
 -- 表的索引 `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD PRIMARY KEY (`id_user`) USING BTREE,
   ADD UNIQUE KEY `mail` (`mail`) USING BTREE,
-  ADD KEY `user_id_index` (`id`) USING BTREE;
+  ADD KEY `user_id_index` (`id_user`) USING BTREE;
 
 --
 -- 表的索引 `user_address`
 --
 ALTER TABLE `user_address`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id213` (`user_id`);
+  ADD KEY `user_id213` (`id_user`);
 
 --
 -- 表的索引 `user_product`
 --
 ALTER TABLE `user_product`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_product_index` (`user_id`) USING BTREE,
-  ADD KEY `products_id13233` (`product_id`);
+  ADD KEY `user_product_index` (`id_user`) USING BTREE,
+  ADD KEY `products_id13233` (`id_product`);
 
 --
 -- 在导出的表使用AUTO_INCREMENT
@@ -212,31 +212,31 @@ ALTER TABLE `user_product`
 -- 使用表AUTO_INCREMENT `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID';
+  MODIFY `id_category` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id';
 
 --
 -- 使用表AUTO_INCREMENT `coupon`
 --
 ALTER TABLE `coupon`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id';
+  MODIFY `id_coupon` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id';
 
 --
 -- 使用表AUTO_INCREMENT `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id';
+  MODIFY `id_order` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id';
 
 --
 -- 使用表AUTO_INCREMENT `product`
 --
 ALTER TABLE `product`
-  MODIFY `category_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '分类ID';
+  MODIFY `id_product` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id';
 
 --
 -- 使用表AUTO_INCREMENT `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID';
+  MODIFY `id_user` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id';
 
 --
 -- 使用表AUTO_INCREMENT `user_address`
