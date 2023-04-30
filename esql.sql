@@ -130,24 +130,7 @@ CREATE TABLE `user_address` (
 
 -- --------------------------------------------------------
 
---
--- 表的结构 `user_product`
---
 
-CREATE TABLE `user_product` (
-  `id_user_product` bigint(20) NOT NULL COMMENT '主键id',
-  `introduction` text DEFAULT NULL COMMENT '介绍',
-  `id_user` bigint(20) DEFAULT NULL COMMENT '用户ID',
-  `id_product` bigint(20) DEFAULT NULL COMMENT 'productID',
-  `is_delete` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否删除',
-  `is_collect` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否收藏',
-  `user_type` tinyint(1) NOT NULL DEFAULT 0 COMMENT '顾客还是商家',
-  `create_time` timestamp NULL DEFAULT current_timestamp() COMMENT '创建时间'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='用户与商品的关系';
-
---
--- 转储表的索引
---
 
 --
 -- 表的索引 `category`
@@ -196,17 +179,7 @@ ALTER TABLE `user_address`
   ADD PRIMARY KEY (`id_user_address`),
   ADD KEY `user_id213` (`id_user_address`);
 
---
--- 表的索引 `user_product`
---
-ALTER TABLE `user_product`
-  ADD PRIMARY KEY (`id_user_product`),
-  ADD KEY `user_product_index` (`id_user`) USING BTREE,
-  ADD KEY `products_id13233` (`id_product`);
 
---
--- 在导出的表使用AUTO_INCREMENT
---
 
 --
 -- 使用表AUTO_INCREMENT `category`
@@ -243,12 +216,6 @@ ALTER TABLE `user`
 --
 ALTER TABLE `user_address`
   MODIFY `id_user_address` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id';
-
---
--- 使用表AUTO_INCREMENT `user_product`
---
-ALTER TABLE `user_product`
-  MODIFY `id_user_product` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id';
 
 
 COMMIT;
