@@ -3227,6 +3227,7 @@ textarea.form-control-lg {
   flex: 1 1 auto;
   width: 1%;
   min-width: 0;
+  height: 2.6rem;
 }
 
 .input-group>.form-control:focus,
@@ -19943,6 +19944,7 @@ fieldset:disabled .btn {
 
 .form-group {
   margin-bottom: 1rem;
+  margin-left: 1rem;
 }
 
 .form-check:not(.form-switch) .form-check-input[type="checkbox"],
