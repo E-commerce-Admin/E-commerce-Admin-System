@@ -4,21 +4,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <title>
-    Order
+    Address
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
-  <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="./assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+  <link id="pagestyle" href="assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -36,6 +36,8 @@
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
+
+
         <li class="nav-item">
           <a class="nav-link  " href="../pages/dashboard.php">
             <div
@@ -115,7 +117,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  active" href="../pages/order.php">
+          <a class="nav-link  " href="../pages/order.php">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -170,7 +172,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/address.php">
+          <a class="nav-link  active" href="../pages/address.php">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -255,6 +257,7 @@
             <span class="nav-link-text ms-1">Logout</span>
           </a>
         </li>
+
       </ul>
     </div>
 
@@ -264,7 +267,7 @@
 
     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
       <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-      <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Order</li>
+      <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Address</li>
     </ol>
 
     <!-- End Navbar -->
@@ -274,34 +277,63 @@
           <div class="card mb-4">
             <div class="card-header pb-0">
 
-              <h6>Order</h6>
+              <h6>Address</h6>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Add address
+              </button>
 
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Add Address</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form method="POST" action="../pages/process_add_address.php" enctype="multipart/form-data">
+                        <section class="base">
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Address ID</label>
+                            <input type="number" name="id_user_address" class="form-control">
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Shipping Address</label>
+                            <input type="text" name="shipping_address" class="form-control">
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Customer ID</label>
+                            <input type="text" name="id_customer" class="form-control">
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Customer Name</label>
+                            <input type="text" name="customer_name" class="form-control">
+                          </div>
+
+                          <div>
+                            <input type="submit" name="simpan" value="Add Customer" class="btn btn-outline-primary">
+                          </div>
+                        </section>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="d-flex justify-content-between">
               <div class="form-group">
                 <label for="sort-by" class="form-label">Sort by:</label>
                 <select id="sort-by" name="sort-by" class="form-control" onchange="location = this.value;">
-                  <option value="?sort-by=id_order" <?php if (isset($_GET['sort-by']) && $_GET['sort-by'] == 'id_order')
-                    echo 'selected'; ?>>Order ID</option>
-                  <option value="?sort-by=order_date" <?php if (isset($_GET['sort-by']) && $_GET['sort-by'] == 'order_date')
-                    echo 'selected'; ?>>Order Date</option>
+                  <option value="?sort-by=id_user_address" <?php if (isset($_GET['sort-by']) && $_GET['sort-by'] == 'id_user_address')
+                    echo 'selected'; ?>>Address ID</option>
+                  <option value="?sort-by=shipping_address" <?php if (isset($_GET['sort-by']) && $_GET['sort-by'] == 'shipping_address')
+                    echo 'selected'; ?>>Address Name</option>
                   <option value="?sort-by=customer_name" <?php if (isset($_GET['sort-by']) && $_GET['sort-by'] == 'customer_name')
                     echo 'selected'; ?>>Customer Name</option>
-                  <option value="?sort-by=product_name" <?php if (isset($_GET['sort-by']) && $_GET['sort-by'] == 'product_name')
-                    echo 'selected'; ?>>Product Name</option>
-                  <option value="?sort-by=quantity" <?php if (isset($_GET['sort-by']) && $_GET['sort-by'] == 'quantity')
-                    echo 'selected'; ?>>Quantity</option>
-                  <option value="?sort-by=price" <?php if (isset($_GET['sort-by']) && $_GET['sort-by'] == 'price')
-                    echo 'selected'; ?>>Price</option>
-                  <option value="?sort-by=coupon_name" <?php if (isset($_GET['sort-by']) && $_GET['sort-by'] == 'coupon_name')
-                    echo 'selected'; ?>>Coupon Name</option>
-                  <option value="?sort-by=subtotal" <?php if (isset($_GET['sort-by']) && $_GET['sort-by'] == 'subtotal')
-                    echo 'selected'; ?>>Subtotal</option>
-                  <option value="?sort-by=shipping_address" <?php if (isset($_GET['sort-by']) && $_GET['sort-by'] == 'shipping_address')
-                    echo 'selected'; ?>>Shipping Address</option>
-                  <option value="?sort-by=payment_method" <?php if (isset($_GET['sort-by']) && $_GET['sort-by'] == 'payment_method')
-                    echo 'selected'; ?>>Payment Method</option>
                 </select>
               </div>
 
@@ -321,86 +353,57 @@
                   <thead>
                     <tr class="text-xs font-weight-bold opacity-6">
                       <th>No</th>
-                      <th class="align-middle text-left">Order Time</th>
-                      <th class="align-middle text-left">Customer</th>
-                      <th class="align-middle text-left">Product Name</th>
-                      <th class="align-middle text-left">Quantity</th>
-                      <th class="align-middle text-left">Price</th>
-                      <th class="align-middle text-left">Coupon</th>
-                      <th class="align-middle text-left">Subtotal</th>
                       <th class="align-middle text-left">Address</th>
-                      <th class="align-middle text-left">Payment Method</th>
+                      <th class="align-middle text-left">Customer ID</th>
+                      <th class="align-middle text-left">Customer Name</th>
+                      <th class="align-middle text-left">Operation</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php
-                    include 'connect_db.php';
+                    include "connect_db.php";
 
                     // Get the selected sorting column and search term from the request parameters
-                    $sort_by = $_GET['sort-by'] ?? 'id_order';
-                    $allowed_sort_fields = ['id_order', 'order_date', 'customer_name', 'product_name', 'quantity', 'price', 'coupon_name', 'subtotal', 'shipping_address', 'payment_method'];
-                    $sort_by = in_array($sort_by, $allowed_sort_fields) ? $sort_by : 'id_order';
-
+                    $sort_by = $_GET['sort-by'] ?? 'id_user_address';
+                    $sort_by = in_array($sort_by, ['id_user_address', 'shipping_address', 'customer_name']) ? $sort_by : 'id_user_address';
                     $search_term = $_GET['search'] ?? '';
 
-                    $qry_order = mysqli_query($conn, "SELECT `order`.id_order, `order`.create_time AS order_date, `order`.user_name AS customer_name, `order`.product_name, `order`.quantity, `order`.price, `order`.coupon_name, `order`.subtotal, `order`.shipping_address, `order`.payment_method
-FROM `order`
-WHERE (`order`.id_order LIKE '%$search_term%' OR `order`.create_time LIKE '%$search_term%' OR `order`.user_name LIKE '%$search_term%' OR `order`.product_name LIKE '%$search_term%' OR `order`.quantity LIKE '%$search_term%' OR `order`.price LIKE '%$search_term%' OR `order`.coupon_name LIKE '%$search_term%' OR `order`.subtotal LIKE '%$search_term%' OR `order`.shipping_address LIKE '%$search_term%' OR `order`.payment_method LIKE '%$search_term%')
-ORDER BY $sort_by ASC");
+                    // Build the SQL query with the selected sorting column and search term
+                    $qry_customer = mysqli_query($conn, "SELECT * FROM user_address WHERE is_delete = 0 AND (customer_name LIKE '%$search_term%' OR shipping_address LIKE '%$search_term%') ORDER BY $sort_by ASC");
 
-                    if (!$qry_order) {
-                      die("Query failed: " . mysqli_error($conn));
-                    }
 
-                    if (mysqli_num_rows($qry_order) > 0) {
-                      $no = 0;
-                      while ($dt_order = mysqli_fetch_array($qry_order)) {
-                        $no++;
-                        ?>
-                        <tr class="text-xs font-weight-bold">
-                          <td class="align-middle text-left">
-                            <?= $no ?>
-                          </td>
-                          <td class="align-middle text-left">
-                            <?= $dt_order['order_date'] ?>
-                          </td>
-                          <td class="align-middle text-left">
-                            <?= $dt_order['customer_name'] ?>
-                          </td>
-                          <td class="align-middle text-left">
-                            <?= $dt_order['product_name'] ?>
-                          </td>
-                          <td class="align-middle text-left">
-                            <?= $dt_order['quantity'] ?>
-                          </td>
-                          <td class="align-middle text-left">
-                            <?= $dt_order['price'] ?>
-                          </td>
-                          <td class="align-middle text-left">
-                            <?= $dt_order['coupon_name'] ?>
-                          </td>
-                          <td class="align-middle text-left">
-                            <?= $dt_order['subtotal'] ?>
-                          </td>
-                          <td class="align-middle text-left">
-                            <?= $dt_order['shipping_address'] ?>
-                          </td>
-                          <td class="align-middle text-left">
-                            <?= $dt_order['payment_method'] ?>
-                          </td>
-                        </tr>
-                        <?php
-                      }
-                    } else {
-                      echo "No records found";
+                    $no = 0;
+                    while ($data_customer = mysqli_fetch_array($qry_customer)) {
+                      $no++; ?>
+                      <tr class="text-xs font-weight-bold">
+                        <td class="align-middle text-left">
+                          <?= $data_customer['id_user_address'] ?>
+                        </td>
+                        <td class="align-middle text-left">
+                          <?= $data_customer['shipping_address'] ?>
+                        </td>
+                        <td class="align-middle text-left">
+                          <?= $data_customer['id_customer'] ?>
+                        </td>
+                        <td class="align-middle text-left">
+                          <?= $data_customer['customer_name'] ?>
+                        </td>
+                        <td class="text-xs font-weight-bold">
+                          <a class="btn btn-success"
+                            href="update_address.php?id_customer=<?= $data_customer['id_customer'] ?>">Update</a>
+
+                          <a href="delete_address.php?id_customer=<?= $data_customer['id_customer'] ?>"
+                            onclick="return confirm('Are you sure you delete this data?')"
+                            class="btn btn-danger">Delete</a>
+                        </td>
+                      </tr>
+                      <?php
                     }
                     ?>
-
                   </tbody>
                 </table>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -409,10 +412,10 @@ ORDER BY $sort_by ASC");
 
 
       <!--   Core JS Files   -->
-      <script src="./assets/js/core/popper.min.js"></script>
-      <script src="./assets/js/core/bootstrap.min.js"></script>
-      <script src="./assets/js/plugins/perfect-scrollbar.min.js"></script>
-      <script src="./assets/js/plugins/smooth-scrollbar.min.js"></script>
+      <script src="assets/js/core/popper.min.js"></script>
+      <script src="assets/js/core/bootstrap.min.js"></script>
+      <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
+      <script src="assets/js/plugins/smooth-scrollbar.min.js"></script>
       <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -433,7 +436,7 @@ ORDER BY $sort_by ASC");
       <!-- Github buttons -->
       <script async defer src="https://buttons.github.io/buttons.js"></script>
       <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-      <script src="./assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+      <script src="assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 </body>
 
 </html>

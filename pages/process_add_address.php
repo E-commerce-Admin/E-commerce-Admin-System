@@ -10,25 +10,25 @@ if ($_POST) {
 
     if (empty($id_customer)) {
         echo "<script>alert('Customer ID must not be
-    empty');location.href='../pages/customer.php';</script>";
+    empty');location.href='../pages/address.php';</script>";
     } elseif (empty($name)) {
         echo "<script>alert('Customer name must not be
-    empty');location.href='../pages/customer.php';</script>";
+    empty');location.href='../pages/address.php';</script>";
     } elseif (empty($address_city)) {
         echo "<script>alert('Customer address city must not be
-    empty');location.href='../pages/customer.php';</script>";
+    empty');location.href='../pages/address.php';</script>";
     } elseif (empty($address_district)) {
         echo "<script>alert('Customer address district must not be
-    empty');location.href='../pages/customer.php';</script>";
+    empty');location.href='../pages/address.php';</script>";
     } elseif (empty($address_street)) {
         echo "<script>alert('Customer address street must not be
-    empty');location.href='../pages/customer.php';</script>";
+    empty');location.href='../pages/address.php';</script>";
     } elseif (empty($zip_code)) {
         echo "<script>alert('Customer zip code must not be
-    empty');location.href='../pages/customer.php';</script>";
+    empty');location.href='../pages/address.php';</script>";
     } elseif (empty($phone)) {
         echo "<script>alert('Customer phone number must not be
-    empty');location.href='../pages/customer.php';</script>";
+    empty');location.href='../pages/address.php';</script>";
     } else {
         include "connect_db.php";
         $insert = mysqli_query($conn, "insert into customer
@@ -37,9 +37,9 @@ if ($_POST) {
     ('" . $id_customer . "','" . $name . "','" . $address_city . "','" . $address_district . "','" . $address_street . "','" . $zip_code . "','" . $phone . "')") or
             die(mysqli_error($conn));
         if ($insert) {
-            echo "<script>alert('Successfully add a customer');location.href='../pages/customer.php';</script>";
+            echo "<script>alert('Successfully add a customer');location.href='../pages/address.php';</script>";
         } else {
-            echo "<script>alert('Failed to add a customer');location.href='../pages/customer.php';</script>";
+            echo "<script>alert('Failed to add a customer');location.href='../pages/address.php';</script>";
         }
     }
 }
