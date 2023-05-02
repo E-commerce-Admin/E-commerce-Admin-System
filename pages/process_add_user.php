@@ -6,15 +6,12 @@ if ($_SESSION['status_login'] != true) {
 ?>
 <?php
 if ($_POST) {
-    $id_user = $_POST['id_user'];
     $username = $_POST['username'];
     $password = $_POST['password'];
     $mail = $_POST['mail'];
     $phone_number = $_POST['phone_number'];
 
-    if (empty($id_user)) {
-        echo "<script>alert('User ID must not be empty');location.href='../pages/user.php';</script>";
-    } elseif (empty($username)) {
+    if (empty($username)) {
         echo "<script>alert('Username must not be empty');location.href='../pages/user.php';</script>";
     } elseif (empty($password)) {
         echo "<script>alert('Password must not be empty');location.href='../pages/user.php';</script>";
@@ -36,7 +33,7 @@ if ($_POST) {
                 echo "<script>alert('Invalid file type. Only png, jpg, and jpeg are allowed.');location.href='../pages/user.php';</script>";
             } else {
                 if ($size < 1044070) {
-                    move_uploaded_file($tmp, '../assets/img/users/' . $namefile);
+                    move_uploaded_file($tmp, '../assets/img/' . $namefile);
                     $user_photo = $namefile;
                 } else {
                     echo "<script>alert('File size is too big. Maximum size is 1 MB.');location.href='../pages/user.php';</script>";
@@ -46,9 +43,8 @@ if ($_POST) {
             // Insert user data into the database
             $authority = $_POST['authority'];
             // Insert user data into the database
-            $creator = $_SESSION['username'];
             $id_creator = (int) $_SESSION['id_user'];
-            $insert = mysqli_query($conn, "INSERT INTO user (id_user, is_delete, username, mail, phone_number, authority, user_photo, password, create_time, creator, id_creator) VALUES ('" . $id_user . "', 0, '" . $username . "', '" . $mail . "', '" . $phone_number . "', '" . $authority . "', '" . $user_photo . "', '" . $password . "', CURRENT_TIMESTAMP(), '" . $creator . "', " . $id_creator . ")") or die(mysqli_error($conn));
+            $insert = mysqli_query($conn, "INSERT INTO user (username, mail, phone_number, authority, user_photo, password, create_time, id_creator) VALUES ('$username', '$mail', '$phone_number', '$authority', '$user_photo', '$password', CURRENT_TIMESTAMP(), $id_creator)") or die(mysqli_error($conn));
 
             if ($insert) {
                 echo "<script>alert('User added successfully.');location.href='../pages/user.php';</script>";

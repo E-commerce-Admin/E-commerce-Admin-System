@@ -322,10 +322,6 @@ if ($_SESSION['status_login'] != true) {
                       <form method="POST" action="../pages/process_add_address.php" enctype="multipart/form-data">
                         <section class="base">
                           <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Address ID</label>
-                            <input type="number" name="id_user_address" class="form-control">
-                          </div>
-                          <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Shipping Address</label>
                             <input type="text" name="shipping_address" class="form-control">
                           </div>
@@ -335,7 +331,7 @@ if ($_SESSION['status_login'] != true) {
                               <option value="" selected disabled>Select Customer Name</option>
                               <?php
                               include "connect_db.php";
-                              $query = mysqli_query($conn, "SELECT id_user, username FROM user WHERE authority = 3");
+                              $query = mysqli_query($conn, "SELECT id_user, username FROM user WHERE authority = 3 AND is_delete = 0");
                               while ($row = mysqli_fetch_array($query)) {
                                 echo '<option value="' . $row['id_user'] . '">' . $row['username'] . '</option>';
                               }
@@ -430,15 +426,6 @@ if ($_SESSION['status_login'] != true) {
                         <td class="align-middle text-left">
                           <?= $data_customer['customer_name'] ?>
                         </td>
-                        <!-- <td class="text-xs font-weight-bold">
-                          <a class="btn btn-success"
-                            href="update_address.php?id_customer=<?= $data_customer['id_customer'] ?>">Update</a>
-
-                          <a href="delete_address.php?id_customer=<?= $data_customer['id_customer'] ?>"
-                            onclick="return confirm('Are you sure you delete this data?')"
-                            class="btn btn-danger">Delete</a>
-                        </td> -->
-
                         <td class="text-xs font-weight-bold">
                           <?php
                           // Retrieve the id_user from the session
@@ -455,8 +442,8 @@ if ($_SESSION['status_login'] != true) {
                             // Display the buttons for all admins
                             if ($authority_level == 2) {
                               // Only super admins can update categories
-                              echo '<a class="btn btn-success" href="update_address.php?id_customer=' . $data_customer['id_customer'] . '">Update</a>';
-                              echo '<a href="delete_address.php?id_customer=' . $data_customer['id_customer'] . '" onclick="return confirm(' . "'Are you sure you want to delete this data?'" . ')" class="btn btn-danger">Delete</a>';
+                              echo '<a class="btn btn-success" href="update_address.php?id_user_address=' . $data_customer['id_user_address'] . '">Update</a>';
+                              echo '<a href="delete_address.php?id_user_address=' . $data_customer['id_user_address'] . '" onclick="return confirm(' . "'Are you sure you want to delete this data?'" . ')" class="btn btn-danger">Delete</a>';
                             } else {
                               // Regular admins get a warning message when they try to update categories
                               echo '<a class="btn btn-success" href="#" onclick="alert(\'You do not have the authority to perform this action. Please log in with a super admin account.\');">Update</a>';

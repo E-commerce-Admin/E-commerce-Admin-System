@@ -1,6 +1,12 @@
 <?php
+session_start();
+if ($_SESSION['status_login'] != true) {
+    header('location: login.php');
+}
+?>
+
+<?php
 if ($_POST) {
-    $id_product = $_POST['id_product'];
     $name_product = $_POST['name_product'];
     $description = $_POST['description'];
     $price = $_POST['price'];
@@ -14,9 +20,7 @@ if ($_POST) {
 
     // Check if any required fields are empty
     $error_messages = array();
-    if (empty($id_product)) {
-        $error_messages[] = "Product ID is required.";
-    }
+    
     if (empty($name_product)) {
         $error_messages[] = "Product name is required.";
     }
@@ -43,6 +47,7 @@ if ($_POST) {
         $tmp = $_FILES['file']['tmp_name'];
         $tipe_file = pathinfo($namefile, PATHINFO_EXTENSION);
         $size = $_FILES['file']['size'];
+        $id_creator = $_SESSION['id_user'];
 
         if (!in_array($tipe_file, $image)) {
             echo "<script>alert('Invalid file type. Only png, jpg, and jpeg are allowed.');location.href='../pages/product.php';</script>";
@@ -50,7 +55,7 @@ if ($_POST) {
             if ($size < 1044070) {
                 move_uploaded_file($tmp, './assets/product_photo/' . $namefile);
                 include "connect_db.php";
-                $query = mysqli_query($conn, "INSERT INTO product (id_product, is_delete, name_product, stock, create_time, delete_time, description, category_name, product_photo, id_category, price) VALUES ('" . $id_product . "', 0, '" . $name_product . "', '" . $stock . "', CURRENT_TIMESTAMP(), NULL, '" . $description . "', '" . $category_name . "', '" . $namefile . "', '" . $id_category . "', '" . $price . "')");
+                $query = mysqli_query($conn, "INSERT INTO product (name_product, stock, create_time, id_creator, delete_time, description, category_name, product_photo, id_category, price) VALUES ('" . $name_product . "', '" . $stock . "', CURRENT_TIMESTAMP(), '" . $id_creator . "', NULL, '" . $description . "', '" . $category_name . "', '" . $namefile . "', '" . $id_category . "', '" . $price . "')");
                 if ($query) {
                     echo "<script>alert('Product added successfully.');location.href='../pages/product.php';</script>";
                 } else {

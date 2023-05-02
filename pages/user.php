@@ -291,10 +291,10 @@ if ($_SESSION['status_login'] != true) {
 
               include "connect_db.php";
               // Retrieve the id_user from the session
-              $id_user = $_SESSION['id_user'];
+              $id_admin = $_SESSION['id_user'];
 
               // Query the authority level of the user in the database
-              $query = "SELECT authority FROM user WHERE id_user = $id_user";
+              $query = "SELECT authority FROM user WHERE id_user = $id_admin";
               $result = mysqli_query($conn, $query);
 
               if ($result) {
@@ -323,10 +323,6 @@ if ($_SESSION['status_login'] != true) {
                     <div class="modal-body">
                       <form method="POST" action="../pages/process_add_user.php" enctype="multipart/form-data">
                         <section class="base">
-                          <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">User ID</label>
-                            <input type="number" name="id_user" class="form-control">
-                          </div>
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Username</label>
                             <input type="text" name="username" class="form-control">
@@ -428,21 +424,21 @@ if ($_SESSION['status_login'] != true) {
                         <td class="text-xs font-weight-bold">
                           <?php
                           // Retrieve the id_user from the session
-                          $id_user = $_SESSION['id_user'];
+                          $id_admin = $_SESSION['id_user'];
 
                           // Query the authority level of the user in the database
-                          $query = "SELECT authority FROM user WHERE id_user = $id_user";
+                          $query = "SELECT authority FROM user WHERE id_user = $id_admin";
                           $result = mysqli_query($conn, $query);
 
                           if ($result) {
-                            $data_user = mysqli_fetch_assoc($result);
-                            $authority_level = $data_user['authority'];
+                            $data_admin = mysqli_fetch_assoc($result);
+                            $authority_level = $data_admin['authority'];
 
                             // Display the buttons for all admins
                             if ($authority_level == 2) {
                               // Only super admins can update categories
-                              echo '<a class="btn btn-success" href="update_user.php?id_user=' . $id_user . '">Update</a>';
-                              echo '<a href="delete_user.php?id_user=' . $id_user . '" onclick="return confirm(' . "'Are you sure you want to delete this data?'" . ')" class="btn btn-danger">Delete</a>';
+                              echo '<a class="btn btn-success" href="update_user.php?id_user=' . $data_user['id_user'] . '">Update</a>';
+                              echo '<a href="delete_user.php?id_user=' . $data_user['id_user'] . '" onclick="return confirm(' . "'Are you sure you want to delete this data?'" . ')" class="btn btn-danger">Delete</a>';
                             } else {
                               // Regular admins get a warning message when they try to update categories
                               echo '<a class="btn btn-success" href="#" onclick="alert(\'You do not have the authority to perform this action. Please log in with a super admin account.\');">Update</a>';

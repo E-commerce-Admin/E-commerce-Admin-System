@@ -1,4 +1,10 @@
 <?php
+session_start();
+if ($_SESSION['status_login'] != true) {
+    header('location: login.php');
+}
+?>
+<?php
 if ($_POST) {
     $id_address_customer = $_POST['customer_name'];
     $shipping_address = $_POST['shipping_address'];
@@ -17,9 +23,10 @@ if ($_POST) {
         if ($customer != null) {
             $id_customer = $customer['id_user'];
             $customer_name = $customer['username'];
+            $id_creator = $_SESSION['id_user'];
 
-            $insert = mysqli_query($conn, "INSERT INTO user_address (id_customer, customer_name, shipping_address) 
-            VALUES ('" . $id_customer . "', '" . $customer_name . "', '" . $shipping_address . "')") or die(mysqli_error($conn));
+            $insert = mysqli_query($conn, "INSERT INTO user_address (id_customer, customer_name, shipping_address, create_time, id_creator) 
+            VALUES ('" . $id_customer . "', '" . $customer_name . "', '" . $shipping_address . "', CURRENT_TIMESTAMP, '" . $id_creator . "')") or die(mysqli_error($conn));
 
             if ($insert) {
                 echo "<script>alert('Successfully added an address');location.href='../pages/address.php';</script>";

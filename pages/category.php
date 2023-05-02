@@ -321,11 +321,6 @@ if ($_SESSION['status_login'] != true) {
                         <section class="base">
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Category
-                              ID</label>
-                            <input type="number" name="id_category" class="form-control">
-                          </div>
-                          <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Category
                               Name</label>
                             <input type="text" name="name_category" class="form-control">
                           </div>

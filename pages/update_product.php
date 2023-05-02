@@ -309,7 +309,7 @@
                       <option value="">Select a category</option>
                       <?php
                       include "connect_db.php";
-                      $query = mysqli_query($conn, "SELECT id_category, category_name FROM category ORDER BY category_name ASC");
+                      $query = mysqli_query($conn, "SELECT id_category, category_name FROM category WHERE is_delete = 0 ORDER BY category_name ASC");
                       while ($row = mysqli_fetch_array($query)) {
                         echo "<option value='" . $row['id_category'] . "|" . $row['category_name'] . "'>" . $row['category_name'] . "</option>";
                       }

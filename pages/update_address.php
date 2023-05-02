@@ -279,7 +279,7 @@
 
               <?php
               include "connect_db.php";
-              $qry_get_customer = mysqli_query($conn, "SELECT * FROM user_address WHERE id_user_address = '" . $_GET['id_customer'] . "'");
+              $qry_get_customer = mysqli_query($conn, "SELECT * FROM user_address WHERE id_user_address = '" . $_GET['id_user_address'] . "'");
               $dt_customer = mysqli_fetch_array($qry_get_customer);
               ?>
               <form method="POST" action="../pages/process_update_address.php" enctype="multipart/form-data">

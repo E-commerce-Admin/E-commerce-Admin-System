@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 02, 2023 at 09:26 PM
+-- Generation Time: May 03, 2023 at 12:55 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.27
 
@@ -45,7 +45,13 @@ CREATE TABLE `category` (
 INSERT INTO `category` (`id_category`, `category_name`, `introduction`, `category_photo`, `create_time`, `id_creator`, `is_delete`, `delete_time`) VALUES
 (1, 'food', 'Category for food products', 'food.jpeg', '2023-04-30 11:43:58', 1, 0, NULL),
 (2, 'electronics', 'Category for electronic products', 'electronics.jpeg', '2023-04-30 11:44:05', 1, 0, NULL),
-(3, 'clothing', 'Category for clothing products', 'clothing.jpeg', '2023-04-30 11:44:08', 2, 0, NULL);
+(3, 'clothing', 'Category for clothing products', 'clothing.jpeg', '2023-04-30 11:44:08', 2, 0, NULL),
+(5, 'test', 'testxxx', 'assets/category_photo/profile.png', '2023-05-02 22:14:34', 2, 1, '2023-05-02 22:14:47'),
+(6, 'asdas', 'testxxx', 'assets/category_photo/profile.png', '2023-05-02 22:23:41', 2, 1, '2023-05-02 22:23:45'),
+(7, 'testasdad', 'This is product 3', 'assets/category_photo/profile.png', '2023-05-02 22:30:31', 2, 1, '2023-05-02 22:30:41'),
+(8, 'test', 'This is product 1', 'assets/category_photo/profile.png', '2023-05-02 22:33:08', 2, 1, '2023-05-02 22:33:20'),
+(9, 'asdas', 'This is product 3', 'assets/category_photo/profile.png', '2023-05-02 22:48:47', 2, 1, '2023-05-02 22:48:59'),
+(10, 'testasdad', 'sadadfasdad', 'assets/category_photo/profile.png', '2023-05-02 22:52:26', 2, 1, '2023-05-02 22:52:34');
 
 -- --------------------------------------------------------
 
@@ -71,10 +77,15 @@ CREATE TABLE `coupon` (
 --
 
 INSERT INTO `coupon` (`id_coupon`, `product_name`, `coupon_name`, `discount`, `is_valid`, `deadline`, `create_time`, `id_creator`, `is_delete`, `delete_time`) VALUES
-(1, 'Banana', 'coupon1', '20%', 0, '2023-04-30 15:40:00', '2023-04-29 22:18:23', 1, 0, NULL),
+(1, 'Product 2', 'coupon1', '20%', 0, '2023-05-12 22:34:00', '2023-04-29 22:18:23', 1, 0, NULL),
 (2, 'Jeans', 'coupon2', '50', 1, '2023-06-29 08:00:00', '2023-04-29 22:18:23', 2, 0, NULL),
 (3, 'Laptop', 'asdsad', '100', 1, '2023-05-17 14:42:00', '2023-04-30 14:43:00', 3, 0, NULL),
-(4, 'test', 'test', '20%', 1, '2023-05-26 08:19:00', '2023-05-01 08:19:28', 4, 0, NULL);
+(4, 'test', 'test', '20%', 1, '2023-05-26 08:19:00', '2023-05-01 08:19:28', 4, 0, NULL),
+(5, 'Product 2', 'sssss', '20%', 1, '2023-05-25 21:23:00', '2023-05-02 21:27:28', 2, 1, '2023-05-02 22:31:44'),
+(102, 'Laptop', 'testasda', '20%', 1, '2023-05-19 22:31:00', '2023-05-02 22:31:39', 2, 0, NULL),
+(103, 'Pizza', 'asdsad', 'asdafsa', 1, '2023-05-02 22:33:00', '2023-05-02 22:33:59', 2, 1, '2023-05-02 22:34:19'),
+(104, 'Pizza', 'asdsad', '20%', 0, '2023-05-02 22:49:00', '2023-05-02 22:49:45', 2, 1, '2023-05-02 22:50:01'),
+(105, 'Jeans', 'asdsadasfa', '20%', 0, '2023-05-02 22:53:00', '2023-05-02 22:53:24', 2, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -153,15 +164,21 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id_product`, `name_product`, `id_category`, `category_name`, `description`, `price`, `stock`, `product_photo`, `create_time`, `id_creator`, `is_delete`, `delete_time`) VALUES
-(1, 'Product 1', 1, 'food', 'This is product 1', 100, 10, 'lays.jpeg', '2023-04-29 22:18:23', 1, 0, NULL),
+(1, 'Product 1', 1, 'food', 'This is product 2asda', 100, 10, 'lays.jpeg', '2023-04-29 22:18:23', 1, 0, NULL),
 (2, 'Product 2', 2, 'electronics', 'This is product 2', 200, 20, 'earpods.jpeg', '2023-04-29 22:18:23', 1, 0, NULL),
-(6, 'Pizza', 1, 'food', 'A delicious pizza with your favorite toppings', 50, 20, 'pizza.jpeg', '2023-04-30 08:00:00', 3, 0, NULL),
-(7, 'Jeans', 3, 'clothing', 'A classic pair of denim jeans for any occasion', 150, 16, 'jeans.jpeg', '2023-04-30 08:00:00', 3, 0, NULL),
-(10, 'Laptop', 2, 'electronics', 'A powerful laptop for work or gaming', 20000, 20, 'laptop.jpeg', '2023-04-30 08:00:00', 4, 0, NULL),
-(11, 'Smartphone', 2, 'electronics', 'The latest smartphone with high-end features', 10000, 50, 'smartphone.jpeg', '2023-04-30 08:00:00', 5, 0, NULL),
-(12, 'Banana', 1, 'food', 'A delicious fruit with lots of nutrients', 50, 100, 'banana.jpeg', '2023-04-30 08:00:00', 5, 0, NULL),
-(13, 'T-shirt', 3, 'clothing', 'A comfortable cotton t-shirt for everyday wear', 100, 30, 'tshirt.jpeg', '2023-04-30 08:00:00', 5, 0, NULL),
-(14, 'Headphones', 2, 'electronics', 'High-quality headphones for music lovers', 500, 10, 'headphones.jpeg', '2023-04-30 08:00:00', 5, 0, NULL);
+(3, 'Pizza', 1, 'food', 'A delicious pizza with your favorite toppings', 50, 20, 'pizza.jpeg', '2023-04-30 08:00:00', 3, 0, NULL),
+(4, 'Jeans', 3, 'clothing', 'A classic pair of denim jeans for any occasion', 150, 17, 'jeans.jpeg', '2023-04-30 08:00:00', 3, 0, NULL),
+(5, 'Laptop', 2, 'electronics', 'A powerful laptop for work or gaming', 20000, 20, 'laptop.jpeg', '2023-04-30 08:00:00', 4, 0, NULL),
+(6, 'Smartphone', 2, 'electronics', 'The latest smartphone with high-end features', 10000, 50, 'smartphone.jpeg', '2023-04-30 08:00:00', 5, 0, NULL),
+(7, 'Banana', 1, 'food', 'A delicious fruit with lots of nutrients', 50, 100, 'banana.jpeg', '2023-04-30 08:00:00', 5, 0, NULL),
+(8, 'T-shirt', 3, 'clothing', 'A comfortable cotton t-shirt for everyday wear', 100, 30, 'tshirt.jpeg', '2023-04-30 08:00:00', 5, 0, NULL),
+(9, 'Headphones', 2, 'electronics', 'High-quality headphones for music lovers', 499, 10, 'headphones.jpeg', '2023-04-30 08:00:00', 5, 0, NULL),
+(11, 'testasdad', 2, 'electronics', 'asfaf', 4, 4, 'profile.png', '2023-05-02 22:15:05', 2, 1, '2023-05-02 22:15:28'),
+(12, 'testasdaf', 1, 'food', 'afsasfa', 3, 3, 'profile.png', '2023-05-02 22:24:12', 2, 1, '2023-05-02 22:24:47'),
+(13, 'testasdaf', 3, 'clothing', 'asdasfa', 3, 3, 'profile.png', '2023-05-02 22:30:56', 2, 1, '2023-05-02 22:31:02'),
+(14, 'testasdaf', 3, 'clothing', 'asdasfa', 4, 3, 'profile.png', '2023-05-02 22:33:36', 2, 1, '2023-05-02 22:33:44'),
+(15, 'asda', 3, 'clothing', 'dfasfa', 3, 3, 'profile.png', '2023-05-02 22:49:12', 2, 1, '2023-05-02 22:52:54'),
+(16, 'testasfa', 3, 'clothing', 'sadsaf', 3, 4, 'profile.png', '2023-05-02 22:52:49', 2, 1, '2023-05-02 22:52:57');
 
 -- --------------------------------------------------------
 
@@ -188,8 +205,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `mail`, `phone_number`, `authority`, `user_photo`, `create_time`, `id_creator`, `is_delete`, `delete_time`) VALUES
-(1, 'John', 'password1', 'John@example.com', '123-456-7890', 1, 'assets/img/team-1.jpg', '2023-05-01 07:16:25', 1, 0, NULL),
-(2, 'Jane', 'password2', 'jane@example.com', '987-654-3210', 2, 'assets/img/team-2.jpg', '2023-05-01 07:16:25', 1, 0, NULL),
+(1, 'John', 'password1', 'John@example.com', '123-456-7890', 1, 'assets/img/team-2.jpg', '2023-05-01 07:16:25', 1, 0, NULL),
+(2, 'Jane', 'password2', 'jane@example.com', '987-654-3212', 2, 'assets/img/team-1.jpg', '2023-05-01 07:16:25', 1, 0, NULL),
 (3, 'customer1', '123456', 'customer@gmail.com', '123456', 3, 'assets/img/team-3.jpg', '2023-05-01 07:16:25', 1, 0, NULL),
 (4, 'admin1', '123456', 'admin1@gmail.com', '123456', 1, 'assets/img/team-1.jpg', '2023-05-01 07:16:25', 2, 0, NULL),
 (5, 'David', 'password5', 'david@example.com', '123-456-7890', 3, 'assets/img/team-4.jpg', '2023-05-01 07:16:25', 2, 0, NULL),
@@ -200,10 +217,9 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `mail`, `phone_number`, `
 (11, 'Test User 2', 'password2', 'testuser2@example.com', '222-222-2222', 3, 'assets/img/team-3.jpg', '2023-05-01 07:16:25', 0, 0, NULL),
 (12, 'Test User 3', 'password3', 'testuser3@example.com', '333-333-3333', 3, 'assets/img/team-1.jpg', '2023-05-01 07:16:25', 0, 0, NULL),
 (13, 'Test User 4', 'password4', 'testuser4@example.com', '444-444-4444', 3, 'assets/img/team-4.jpg', '2023-05-01 07:16:25', 0, 0, NULL),
-(14, 'Test User 5', 'password5', 'testuser5@example.com', '555-555-5555', 3, 'assets/img/team-3.jpg', '2023-05-01 07:16:25', 0, 0, NULL),
-(15, 'testing5', '123456', 'shining3169@icloud.com', '18273891789841', 0, 'profile.png', '2023-05-02 08:11:38', 0, 1, '2023-05-02 08:22:20'),
-(16, 'neilsyaamstrani', '12312', 'Joh1111n@example.com', '18273891789841', 0, 'dataset.png', '2023-05-02 08:08:56', 0, 1, '2023-05-02 08:09:56'),
-(18, 'admin11111', '123456', 'John@example.com111', '18273891789841111', 3, 'profile.png', '2023-05-02 08:40:49', 4, 1, '2023-05-02 08:41:08');
+(14, 'Test User 5', 'password5', 'testuser5@example.com', '555-555-5555', 2, 'assets/img/team-3.jpg', '2023-05-01 07:16:25', 0, 0, NULL),
+(16, 'admin1asdsa', '123456', 'shining3169@icloud.comas', '18273891789841', 3, 'profile.png', '2023-05-02 22:50:45', 2, 1, '2023-05-02 22:51:01'),
+(17, 'asdfaa', '123456', 'asdafasfa', '18273891789841', 3, 'profile.png', '2023-05-02 22:54:10', 2, 1, '2023-05-02 22:54:15');
 
 -- --------------------------------------------------------
 
@@ -227,19 +243,26 @@ CREATE TABLE `user_address` (
 --
 
 INSERT INTO `user_address` (`id_user_address`, `id_customer`, `customer_name`, `shipping_address`, `create_time`, `id_creator`, `is_delete`, `delete_time`) VALUES
-(1, 1, 'John', '123 Main St, Anytown USA', '2023-05-01 07:17:09', 0, 0, NULL),
+(1, 1, 'John', '123 Main St, Anytown USAA', '2023-05-01 07:17:09', 0, 0, NULL),
 (2, 2, 'Jane', '456 Broad St, Anytown USA', '2023-05-01 07:17:09', 0, 0, NULL),
 (3, 2, 'Jane', '789 Maple Ave, Los Angeles, CA 90001', '2023-05-01 07:17:09', 0, 0, NULL),
 (4, 2, 'Jane', '987 Oak Rd, San Francisco, CA 94102', '2023-05-01 07:17:09', 0, 0, NULL),
 (5, 3, 'customer1', '321 Cherry St, Chicago, IL 60601', '2023-05-01 07:17:09', 0, 0, NULL),
-(6, 4, 'admin1', '654 Pine Ave, Miami, FL 33130', '2023-05-01 07:17:09', 0, 0, NULL),
+(6, 4, 'admin1', '654 Pine Ave, Miami, FL 33130', '2023-05-01 07:17:09', 0, 1, '2023-05-02 22:37:16'),
 (7, 5, 'David', '246 Walnut Blvd, Austin, TX 78701', '2023-05-01 07:17:09', 0, 0, NULL),
 (8, 6, 'Emily', '135 Cedar Dr, Seattle, WA 98101', '2023-05-01 07:17:09', 0, 0, NULL),
 (9, 8, 'Amy', '369 Birch Ln, Atlanta, GA 30301', '2023-05-01 07:17:09', 0, 0, NULL),
 (10, 9, 'Bob', '753 Spruce Rd, Denver, CO 80201', '2023-05-01 07:17:09', 0, 0, NULL),
 (11, 1, 'John', '123 Main St, New York, NY 10001', '2023-05-01 07:17:09', 0, 0, NULL),
 (12, 1, 'John', '456 Elm St, Boston, MA 02115', '2023-05-01 07:17:09', 0, 0, NULL),
-(13, 8, 'Amy', 'asdadasd', '2023-05-02 09:21:34', 0, 0, NULL);
+(13, 8, 'Amy', 'asdadasd', '2023-05-02 09:21:34', 0, 0, NULL),
+(14, 8, 'Amy', 'sdabjfbkaf', '2023-05-02 21:45:02', 2, 0, NULL),
+(15, 11, 'Test User 2', '123 Main St, Anytown USAA', '2023-05-02 21:45:27', 2, 0, NULL),
+(16, 14, 'Test User 5', 'askdhiafpasdasd', '2023-05-02 21:46:15', 2, 0, NULL),
+(17, 6, 'Emily', 'askdhiafp', '2023-05-02 22:17:31', 2, 1, '2023-05-02 22:40:07'),
+(18, 5, 'David', '123 Main St, Anytown USAA', '2023-05-02 22:34:29', 2, 0, NULL),
+(19, 8, 'Amyasda', '123 Main St, Anytown USA', '2023-05-02 22:50:16', 2, 1, '2023-05-02 22:50:27'),
+(20, 8, 'Amyasda', '123 Main St, Anytown USA', '2023-05-02 22:53:49', 2, 1, '2023-05-02 22:53:58');
 
 --
 -- Indexes for dumped tables
@@ -299,13 +322,13 @@ ALTER TABLE `user_address`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id_category` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id', AUTO_INCREMENT=5;
+  MODIFY `id_category` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id', AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `coupon`
 --
 ALTER TABLE `coupon`
-  MODIFY `id_coupon` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id', AUTO_INCREMENT=5;
+  MODIFY `id_coupon` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id', AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `order`
@@ -317,19 +340,19 @@ ALTER TABLE `order`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id_product` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id', AUTO_INCREMENT=15;
+  MODIFY `id_product` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id', AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id', AUTO_INCREMENT=19;
+  MODIFY `id_user` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id', AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `user_address`
 --
 ALTER TABLE `user_address`
-  MODIFY `id_user_address` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id', AUTO_INCREMENT=14;
+  MODIFY `id_user_address` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id', AUTO_INCREMENT=21;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

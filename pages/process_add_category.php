@@ -1,7 +1,13 @@
 <?php
+session_start();
+if ($_SESSION['status_login'] != true) {
+  header('location: login.php');
+}
+?>
+<?php
 
 if ($_POST) {
-    $id_category = $_POST['id_category'];
+    $id_creator = $_SESSION['id_user'];
     $name_category = $_POST['name_category'];
     $description = $_POST['description'];
 
@@ -35,7 +41,7 @@ if ($_POST) {
         }
 
         // Insert new category into database
-        $insert = mysqli_query($conn, "INSERT INTO category (id_category, category_name, introduction, category_photo, creator_id, creator_name, create_time) VALUES ('$id_category', '$name_category', '$description', '$category_photo', '1', 'Admin', now())") or die(mysqli_error($conn));
+        $insert = mysqli_query($conn, "INSERT INTO category (category_name, introduction, category_photo, id_creator, create_time) VALUES ('$name_category', '$description', '$category_photo', '$id_creator', now())") or die(mysqli_error($conn));
 
         if ($insert) {
             echo "<script>alert('Category added successfully.');location.href='../pages/category.php';</script>";

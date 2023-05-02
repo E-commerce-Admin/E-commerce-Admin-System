@@ -319,10 +319,6 @@ if ($_SESSION['status_login'] != true) {
                       <form method="POST" action="../pages/process_add_product.php" enctype="multipart/form-data">
                         <section class="base">
                           <div class="mb-3">
-                            <label for="id_product" class="form-label">Product ID</label>
-                            <input type="text" name="id_product" id="id_product" class="form-control" required>
-                          </div>
-                          <div class="mb-3">
                             <label for="name_product" class="form-label">Product Name</label>
                             <input type="text" name="name_product" id="name_product" class="form-control" required>
                           </div>
@@ -332,11 +328,11 @@ if ($_SESSION['status_login'] != true) {
                           </div>
                           <div class="mb-3">
                             <label for="price" class="form-label">Product Price</label>
-                            <input type="text" name="price" id="price" class="form-control" required>
+                            <input type="number" name="price" id="price" class="form-control" required>
                           </div>
                           <div class="mb-3">
                             <label for="stock" class="form-label">Product Stock</label>
-                            <input type="text" name="stock" id="stock" class="form-control" required>
+                            <input type="number" name="stock" id="stock" class="form-control" required>
                           </div>
                           <div class="mb-3">
                             <label for="id_category" class="form-label">Category</label>
@@ -344,7 +340,7 @@ if ($_SESSION['status_login'] != true) {
                               <option value="">Select a category</option>
                               <?php
                               include "connect_db.php";
-                              $query = mysqli_query($conn, "SELECT id_category, category_name FROM category ORDER BY category_name ASC");
+                              $query = mysqli_query($conn, "SELECT id_category, category_name FROM category WHERE is_delete = 0 ORDER BY category_name ASC");
                               while ($row = mysqli_fetch_array($query)) {
                                 echo "<option value='" . $row['id_category'] . "|" . $row['category_name'] . "'>" . $row['category_name'] . "</option>";
                               }
@@ -409,8 +405,8 @@ if ($_SESSION['status_login'] != true) {
                     include "connect_db.php";
 
                     // Get the selected sorting column and search term from the request parameters
-                    $sort_by = $_GET['sort-by'] ?? 'category_name';
-                    $sort_by = in_array($sort_by, ['category_name', 'id_product', 'name_product']) ? $sort_by : 'category_name';
+                    $sort_by = $_GET['sort-by'] ?? 'id_product';
+                    $sort_by = in_array($sort_by, ['category_name', 'id_product', 'name_product']) ? $sort_by : 'id_product';
                     $search_term = $_GET['search'] ?? '';
 
                     // Get the category id from the request parameters

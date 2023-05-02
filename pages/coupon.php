@@ -324,7 +324,7 @@ if ($_SESSION['status_login'] != true) {
                               <option value="">--Select a product--</option>
                               <?php
                               include "connect_db.php";
-                              $qry_product = mysqli_query($conn, "SELECT id_product, name_product FROM product");
+                              $qry_product = mysqli_query($conn, "SELECT id_product, name_product FROM product WHERE is_delete = 0");
                               while ($data_product = mysqli_fetch_array($qry_product)) {
                                 ?>
                                 <option value="<?= $data_product['name_product'] ?>"><?= $data_product['name_product'] ?>
@@ -333,10 +333,6 @@ if ($_SESSION['status_login'] != true) {
                               }
                               ?>
                             </select>
-                          </div>
-                          <div class="mb-3">
-                            <label for="price" class="form-label">Coupon ID</label>
-                            <input type="number" name="id_coupon" class="form-control" required>
                           </div>
                           <div class="mb-3">
                             <label for="coupon_name" class="form-label">Coupon Name</label>
