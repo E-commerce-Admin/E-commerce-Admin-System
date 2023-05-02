@@ -48,6 +48,10 @@ The E-commerce Admin System provides the following user permissions:
 2. Super Admin: Can add, edit, and delete all tables (username: Jane, password: password2)
 3. Customer: Does not have admin system permissions (username: customer1, password: 123456)
 
+## UI Design
+
+Demo video available at 
+
 ## Project Structure
 
 ```
