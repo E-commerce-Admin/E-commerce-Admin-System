@@ -204,7 +204,7 @@ if ($_SESSION['status_login'] != true) {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/admin.php">
+          <a class="nav-link  " href="../pages/user.php">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -324,16 +324,8 @@ if ($_SESSION['status_login'] != true) {
                             <input type="text" name="coupon_name" class="form-control" required>
                           </div>
                           <div class="mb-3">
-                            <label for="price" class="form-label">Coupon Price</label>
-                            <input type="number" name="price" class="form-control" required>
-                          </div>
-                          <div class="mb-3">
                             <label for="discount" class="form-label">Coupon Discount (Percentage)</label>
-                            <input type="number" name="discount" class="form-control" required>
-                          </div>
-                          <div class="mb-3">
-                            <label for="validity" class="form-label">Validity (1 for valid and 0 for invalid)</label>
-                            <input type="number" name="validity" class="form-control" required>
+                            <input type="text" name="discount" class="form-control" required>
                           </div>
                           <div class="mb-3">
                             <label for="deadline" class="form-label">Deadline</label>

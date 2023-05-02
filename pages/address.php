@@ -198,7 +198,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/admin.php">
+          <a class="nav-link  " href="../pages/user.php">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -304,14 +304,30 @@
                             <input type="text" name="shipping_address" class="form-control">
                           </div>
                           <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Customer ID</label>
-                            <input type="text" name="id_customer" class="form-control">
+                            <label for="customer_name" class="form-label">Customer Name</label>
+                            <select class="form-select" name="customer_name" id="customer_name">
+                              <option value="" selected disabled>Select Customer Name</option>
+                              <?php
+                              include "connect_db.php";
+                              $query = mysqli_query($conn, "SELECT id_user, username FROM user WHERE authority = 3");
+                              while ($row = mysqli_fetch_array($query)) {
+                                echo '<option value="' . $row['id_user'] . '">' . $row['username'] . '</option>';
+                              }
+                              ?>
+                            </select>
+                          </div>
+                          <div class="mb-3">
+                            <label for="id_customer" class="form-label">Customer ID</label>
+                            <input type="text" name="id_customer" id="id_customer" class="form-control">
                           </div>
 
-                          <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Customer Name</label>
-                            <input type="text" name="customer_name" class="form-control">
-                          </div>
+                          <script>
+                            // Get the selected customer name and update the customer ID input field
+                            document.getElementById("customer_name").addEventListener("change", function () {
+                              var customerId = this.value;
+                              document.getElementById("id_customer").value = customerId;
+                            });
+                          </script>
 
                           <div>
                             <input type="submit" name="simpan" value="Add Customer" class="btn btn-outline-primary">
@@ -436,7 +452,7 @@
       <!-- Github buttons -->
       <script async defer src="https://buttons.github.io/buttons.js"></script>
       <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-      <script src="assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+      <script src="assets/js/soft-ui-dashboard.min.js"></script>
 </body>
 
 </html>

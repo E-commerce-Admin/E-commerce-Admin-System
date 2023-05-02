@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <title>
-        Edit coupon
+        Edit Category
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -66,7 +66,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="../pages/category.php">
+                    <a class="nav-link  active" href="../pages/category.php">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1"
@@ -150,7 +150,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  active" href="../pages/coupon.php">
+                    <a class="nav-link  " href="../pages/coupon.php">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1"
@@ -273,7 +273,7 @@
 
         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Edit coupon</li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Edit category</li>
         </ol>
 
         <div class="container-fluid py-4">
@@ -281,72 +281,54 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h6>Edit coupon</h6>
+                            <h6>Edit Category</h6>
 
                             <?php
                             include "connect_db.php";
-                            $id_coupon = $_GET['id_coupon'];
-                            $qry_get_coupon = mysqli_query($conn, "SELECT * FROM coupon WHERE id_coupon = '$id_coupon' AND is_delete = 0");
+                            $id_category = $_GET['id_category'];
+                            $qry_get_category = mysqli_query($conn, "SELECT * FROM category WHERE id_category = '$id_category' AND is_delete = 0");
 
-                            if (mysqli_num_rows($qry_get_coupon) == 0) {
-                                // if coupon is not found
-                                echo "coupon not found";
+                            if (mysqli_num_rows($qry_get_category) == 0) {
+                                // if category is not found
+                                echo "category not found";
                                 exit;
                             }
 
-                            $dt_coupon = mysqli_fetch_assoc($qry_get_coupon);
+                            $dt_category = mysqli_fetch_assoc($qry_get_category);
                             ?>
-                            <form method="POST" action="../pages/process_update_coupon.php"
+                            <form method="POST" action="../pages/process_update_category.php"
                                 enctype="multipart/form-data">
                                 <section class="base">
                                     <div class="mb-3">
-                                        <input type="hidden" name="id_coupon" value="<?= $dt_coupon['id_coupon'] ?>">
+                                        <input type="hidden" name="id_category"
+                                            value="<?= $dt_category['id_category'] ?>">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Coupon name</label>
-                                        <input type="text" name="coupon_name" value="<?= $dt_coupon['coupon_name'] ?>"
-                                            class="form-control" required>
+                                        <label for="exampleInputEmail1" class="form-label">Category Name</label>
+                                        <input type="text" name="category_name"
+                                            value="<?= $dt_category['category_name'] ?>" class="form-control" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="product_name" class="form-label">Product name</label>
-                                        <select class="form-select" name="product_name" id="product_name" required>
-                                            <option value="">--Select a product--</option>
-                                            <?php
-                                            include "connect_db.php";
-                                            $qry_product = mysqli_query($conn, "SELECT id_product, name_product FROM product");
-                                            while ($data_product = mysqli_fetch_array($qry_product)) {
-                                                ?>
-                                                <option value="<?= $data_product['name_product'] ?>"><?= $data_product['name_product'] ?>
-                                                </option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
+                                        <label for="exampleInputEmail1" class="form-label">Category Introduction</label>
+                                        <input type="text" name="introduction"
+                                            value="<?= $dt_category['introduction'] ?>" class="form-control" required>
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" name="keep_photo"
+                                            id="keep_photo">
+                                        <label class="form-check-label" for="keep_photo">Keep existing photo</label>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Category Photo</label>
+                                        <input type="file" name="file" class="form-control">
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">coupon discount</label>
-                                        <input type="text" name="discount" value="<?= $dt_coupon['discount'] ?>"
-                                            class="form-control" required>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="validity" class="form-label">Validity (1 for valid and 0 for
-                                            invalid)</label>
-                                        <input type="number" name="validity" class="form-control" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="deadline" class="form-label">Deadline</label>
-                                        <input type="datetime-local" name="deadline" class="form-control" required>
-                                    </div>
                                     <div>
                                         <input type="submit" name="simpan" value="Submit" class="btn btn-primary">
-                                        <a class="btn btn-warning" href="../pages/coupon.php">Cancel</a>
+                                        <a class="btn btn-warning" href="../pages/category.php">Cancel</a>
                                     </div>
                                 </section>
                             </form>
-
-
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
@@ -355,8 +337,6 @@
                     </div>
                 </div>
             </div>
-
-
 
 
 

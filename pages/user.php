@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <title>
-    Admin
+    User
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -36,9 +36,9 @@
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
-        
 
-<li class="nav-item">
+
+        <li class="nav-item">
           <a class="nav-link  " href="../pages/dashboard.php">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -198,7 +198,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  active" href="../pages/admin.php">
+          <a class="nav-link  active" href="../pages/user.php">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -267,7 +267,7 @@
 
     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
       <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-      <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Admin</li>
+      <li class="breadcrumb-item text-sm text-dark active" aria-current="page">User</li>
     </ol>
 
     <!-- End Navbar -->
@@ -277,31 +277,26 @@
           <div class="card mb-4">
             <div class="card-header pb-0">
 
-              <h6>Admin</h6>
+              <h6>User</h6>
               <!-- Button trigger modal -->
               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Add admin
+                Add user
               </button>
-
               <!-- Modal -->
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Add Admin</h5>
+                      <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <form method="POST" action="../pages/process_add_admin.php" enctype="multipart/form-data">
+                      <form method="POST" action="../pages/process_add_user.php" enctype="multipart/form-data">
                         <section class="base">
                           <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Admin ID</label>
-                            <input type="text" name="id_admin" class="form-control">
-                          </div>
-                          <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Admin Name</label>
-                            <input type="text" name="name_admin" class="form-control">
+                            <label for="exampleInputEmail1" class="form-label">User ID</label>
+                            <input type="number" name="id_user" class="form-control">
                           </div>
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Username</label>
@@ -311,8 +306,29 @@
                             <label for="exampleInputEmail1" class="form-label">Password</label>
                             <input type="text" name="password" class="form-control">
                           </div>
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Mail</label>
+                            <input type="text" name="mail" class="form-control">
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Phone</label>
+                            <input type="text" name="phone_number" class="form-control">
+                          </div>
+                          <div class="mb-3">
+                            <label for="file" class="form-label">User Photo</label>
+                            <input type="file" name="file" id="file" class="form-control" required>
+                          </div>
+                          <div class="mb-3">
+                            <label for="authority" class="form-label">Authority</label>
+                            <select name="authority" class="form-select" required>
+                              <option value="" selected disabled>Select an authority level</option>
+                              <option value="1">Admin</option>
+                              <option value="2">Super Admin</option>
+                              <option value="3">Customer</option>
+                            </select>
+                          </div>
                           <div>
-                            <input type="submit" name="save" value="Add Admin" class="btn btn-outline-primary">
+                            <input type="submit" name="save" value="Add User" class="btn btn-outline-primary">
                           </div>
                         </section>
                       </form>
@@ -321,6 +337,7 @@
                 </div>
               </div>
 
+
             </div>
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
@@ -328,36 +345,63 @@
                   <thead>
                     <tr class="text-xs font-weight-bold opacity-6">
                       <th>No</th>
-                      <th class="align-middle text-left">Admin Name</th>
                       <th class="align-middle text-left">Username</th>
                       <th class="align-middle text-left">Password</th>
+                      <th class="align-middle text-left">Mail</th>
+                      <th class="align-middle text-left">Phone</th>
+                      <th class="align-middle text-left">Photo</th>
+                      <th class="align-middle text-left">Authority</th>
                       <th class="align-middle text-left">Operation</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php
                     include "connect_db.php";
-                    $qry_admin = mysqli_query($conn, "select * from admin");
+                    $qry_user = mysqli_query($conn, "select * from user where is_delete = 0");
                     $no = 0;
-                    while ($data_admin = mysqli_fetch_array($qry_admin)) {
+                    while ($data_user = mysqli_fetch_array($qry_user)) {
                       $no++; ?>
                       <tr class="text-xs font-weight-bold">
                         <td class="align-middle text-left">
-                        <?= $data_admin['id_admin'] ?>
+                          <?= $data_user['id_user'] ?>
                         </td>
                         <td class="align-middle text-left">
-                          <?= $data_admin['name_admin'] ?>
+                          <?= $data_user['username'] ?>
                         </td>
                         <td class="align-middle text-left">
-                          <?= $data_admin['username'] ?>
+                          <?= $data_user['password'] ?>
                         </td>
                         <td class="align-middle text-left">
-                          <?= $data_admin['password'] ?>
+                          <?= $data_user['mail'] ?>
                         </td>
-                        <td class="text-xs font-weight-bold">
-                          <a class="btn btn-success" href="update_admin.php?id_admin=<?= $data_admin['id_admin'] ?>">Update</a>
+                        <td class="align-middle text-left">
+                          <?= $data_user['phone_number'] ?>
+                        </td>
+                        <td><img src="<?= $data_user['user_photo'] ?>" width="50px" ;></td>
+                        <td class="align-middle text-left">
+                          <?php
+                          switch ($data_user['authority']) {
+                            case 1:
+                              echo "Admin";
+                              break;
+                            case 2:
+                              echo "Super Admin";
+                              break;
+                            case 3:
+                              echo "Customer";
+                              break;
+                            default:
+                              echo "Unknown";
+                              break;
+                          }
+                          ?>
+                        </td>
 
-                          <a href="delete_admin.php?id_admin=<?= $data_admin['id_admin'] ?>"
+                        <td class="text-xs font-weight-bold">
+                          <a class="btn btn-success"
+                            href="update_user.php?id_user=<?= $data_user['id_user'] ?>">Update</a>
+
+                          <a href="delete_user.php?id_user=<?= $data_user['id_user'] ?>"
                             onclick="return confirm('Are you sure about deleting this data?')"
                             class="btn btn-danger">Delete</a>
                         </td>

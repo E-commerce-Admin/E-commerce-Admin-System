@@ -204,7 +204,7 @@ if ($_SESSION['status_login'] != true) {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/admin.php">
+          <a class="nav-link  " href="../pages/user.php">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -304,7 +304,7 @@ if ($_SESSION['status_login'] != true) {
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Category
                               ID</label>
-                            <input type="text" name="id_category" class="form-control">
+                            <input type="number" name="id_category" class="form-control">
                           </div>
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Category
@@ -364,7 +364,7 @@ if ($_SESSION['status_login'] != true) {
                         <td><img src="assets/category_photo/<?= $data_category['category_photo'] ?>" width="100px" ;></td>
                         <td class="text-xs font-weight-bold">
                           <a class="btn btn-warning"
-                            href="update_category.php?id_category=<?= $data_category['id_category'] ?>">View</a>
+                            href="product.php?id_category=<?= $data_category['id_category'] ?>">View</a>
                           <a class="btn btn-success"
                             href="update_category.php?id_category=<?= $data_category['id_category'] ?>">Update</a>
 

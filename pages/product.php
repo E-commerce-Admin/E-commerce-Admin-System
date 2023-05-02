@@ -204,7 +204,7 @@ if ($_SESSION['status_login'] != true) {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/admin.php">
+          <a class="nav-link  " href="../pages/user.php">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -394,9 +394,15 @@ if ($_SESSION['status_login'] != true) {
                     $sort_by = in_array($sort_by, ['category_name', 'id_product', 'name_product']) ? $sort_by : 'category_name';
                     $search_term = $_GET['search'] ?? '';
 
-                    // Build the SQL query with the selected sorting column and search term
-                    $qry_product = mysqli_query($conn, "SELECT * FROM product WHERE is_delete = 0 AND (name_product LIKE '%$search_term%' OR description LIKE '%$search_term%') ORDER BY $sort_by ASC");
+                    // Get the category id from the request parameters
+                    $category_id = $_GET['id_category'] ?? '';
 
+                    // Build the SQL query with the selected sorting column, search term, and category id
+                    $where_clause = "is_delete = 0 AND (name_product LIKE '%$search_term%' OR description LIKE '%$search_term%')";
+                    if (!empty($category_id)) {
+                      $where_clause .= " AND id_category = $category_id";
+                    }
+                    $qry_product = mysqli_query($conn, "SELECT * FROM product WHERE $where_clause ORDER BY $sort_by ASC");
 
                     $no = 0;
                     while ($data_product = mysqli_fetch_array($qry_product)) {
@@ -430,9 +436,8 @@ if ($_SESSION['status_login'] != true) {
                             class="btn btn-danger">Delete</a>
                         </td>
                       </tr>
-                      <?php
-                    }
-                    ?>
+                    <?php } ?>
+
                   </tbody>
                 </table>
               </div>
