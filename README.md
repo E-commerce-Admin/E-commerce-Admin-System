@@ -50,7 +50,9 @@ The E-commerce Admin System provides the following user permissions:
 
 ## UI Design
 
-Demo video available at 
+Demo video for admin available at [here](https://github.com/E-commerce-Admin/E-commerce-Admin-System/blob/master/demo_admin.mp4).
+
+Demo video for super admin available at [here](https://github.com/E-commerce-Admin/E-commerce-Admin-System/blob/master/demo_super_admin.mp4).
 
 ## Project Structure
 
