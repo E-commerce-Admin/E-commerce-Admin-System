@@ -284,11 +284,29 @@ if ($_SESSION['status_login'] != true) {
             <div class="card-header pb-0">
 
               <h6>Category</h6>
-              <!-- Button trigger modal -->
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Add Category
-              </button>
+              <?php
+              include "connect_db.php";
+              // Retrieve the id_user from the session
+              $id_user = $_SESSION['id_user'];
 
+              // Query the authority level of the user in the database
+              $query = "SELECT authority FROM user WHERE id_user = $id_user";
+              $result = mysqli_query($conn, $query);
+
+              if ($result) {
+                $data_user = mysqli_fetch_assoc($result);
+                $authority_level = $data_user['authority'];
+                // Display the "Add Category" button for super admins only
+                if ($authority_level == 2) {
+                  echo '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Category</button>';
+                } else {
+                  echo '<button type="button" class="btn btn-primary" onclick="alert(\'You do not have the authority to perform this action. Please log in with a super admin account.\');">Add Category</button>';
+                }
+              } else {
+                // Handle errors in case the query fails
+                echo '<p>Failed to retrieve user authority level.</p>';
+              }
+              ?>
               <!-- Modal -->
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -363,14 +381,31 @@ if ($_SESSION['status_login'] != true) {
                         </td>
                         <td><img src="assets/category_photo/<?= $data_category['category_photo'] ?>" width="100px" ;></td>
                         <td class="text-xs font-weight-bold">
-                          <a class="btn btn-warning"
-                            href="product.php?id_category=<?= $data_category['id_category'] ?>">View</a>
-                          <a class="btn btn-success"
-                            href="update_category.php?id_category=<?= $data_category['id_category'] ?>">Update</a>
+                          <?php
+                          // Retrieve the id_user from the session
+                          $id_user = $_SESSION['id_user'];
 
-                          <a href="delete_category.php?id_category=<?= $data_category['id_category'] ?>"
-                            onclick="return confirm('Are you sure you delete this data?')"
-                            class="btn btn-danger">Delete</a>
+                          // Query the authority level of the user in the database
+                          $query = "SELECT authority FROM user WHERE id_user = $id_user";
+                          $result = mysqli_query($conn, $query);
+
+                          if ($result) {
+                            $data_user = mysqli_fetch_assoc($result);
+                            $authority_level = $data_user['authority'];
+
+                            // Display the buttons for all admins
+                            echo '<a class="btn btn-warning" href="product.php?id_category=' . $data_category['id_category'] . '">View</a>';
+                            if ($authority_level == 2) {
+                              // Only super admins can update categories
+                              echo '<a class="btn btn-success" href="update_category.php?id_category=' . $data_category['id_category'] . '">Update</a>';
+                              echo '<a href="delete_category.php?id_category=' . $data_category['id_category'] . '" onclick="return confirm(' . "'Are you sure you want to delete this data?'" . ')" class="btn btn-danger">Delete</a>';
+                            } else {
+                              // Regular admins get a warning message when they try to update categories
+                              echo '<a class="btn btn-success" href="#" onclick="alert(\'You do not have the authority to perform this action. Please log in with a super admin account.\');">Update</a>';
+                              echo '<a class="btn btn-danger" href="#" onclick="alert(\'You do not have the authority to perform this action. Please log in with a super admin account.\');">Delete</a>';
+                            }
+                          }
+                          ?>
                         </td>
                       </tr>
                       <?php

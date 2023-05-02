@@ -301,7 +301,17 @@ if ($_SESSION['status_login'] != true) {
         <div class="row gx-4">
           <div class="col-auto">
             <div class="avatar avatar-xl position-relative">
-              <img src="./assets/img/profile.png" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+              <?php
+              include "connect_db.php";
+
+              // Retrieve the user's photo file path from the database based on their id_user value in the $_SESSION variable
+              $qry_user = mysqli_query($conn, "SELECT * FROM user WHERE id_user = '{$_SESSION['id_user']}'");
+              $data_user = mysqli_fetch_array($qry_user);
+
+              // Display the user's photo using the retrieved file path
+              ?>
+              <img src="<?= $data_user['user_photo'] ?>" alt="profile_image" width="50px">
+
             </div>
           </div>
           <div class="col-auto my-auto">
