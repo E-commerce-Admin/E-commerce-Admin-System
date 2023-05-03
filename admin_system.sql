@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 03, 2023 at 12:55 AM
+-- Generation Time: May 03, 2023 at 07:32 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.27
 
@@ -61,7 +61,7 @@ INSERT INTO `category` (`id_category`, `category_name`, `introduction`, `categor
 
 CREATE TABLE `coupon` (
   `id_coupon` bigint(20) NOT NULL COMMENT '主键id',
-  `product_name` varchar(255) DEFAULT NULL COMMENT 'product_name',
+  `id_product` bigint(20) NOT NULL COMMENT 'id_product',
   `coupon_name` varchar(255) DEFAULT NULL COMMENT 'coupon_name',
   `discount` varchar(20) DEFAULT NULL COMMENT '打几折/减多少',
   `is_valid` tinyint(1) NOT NULL DEFAULT 0,
@@ -76,16 +76,11 @@ CREATE TABLE `coupon` (
 -- Dumping data for table `coupon`
 --
 
-INSERT INTO `coupon` (`id_coupon`, `product_name`, `coupon_name`, `discount`, `is_valid`, `deadline`, `create_time`, `id_creator`, `is_delete`, `delete_time`) VALUES
-(1, 'Product 2', 'coupon1', '20%', 0, '2023-05-12 22:34:00', '2023-04-29 22:18:23', 1, 0, NULL),
-(2, 'Jeans', 'coupon2', '50', 1, '2023-06-29 08:00:00', '2023-04-29 22:18:23', 2, 0, NULL),
-(3, 'Laptop', 'asdsad', '100', 1, '2023-05-17 14:42:00', '2023-04-30 14:43:00', 3, 0, NULL),
-(4, 'test', 'test', '20%', 1, '2023-05-26 08:19:00', '2023-05-01 08:19:28', 4, 0, NULL),
-(5, 'Product 2', 'sssss', '20%', 1, '2023-05-25 21:23:00', '2023-05-02 21:27:28', 2, 1, '2023-05-02 22:31:44'),
-(102, 'Laptop', 'testasda', '20%', 1, '2023-05-19 22:31:00', '2023-05-02 22:31:39', 2, 0, NULL),
-(103, 'Pizza', 'asdsad', 'asdafsa', 1, '2023-05-02 22:33:00', '2023-05-02 22:33:59', 2, 1, '2023-05-02 22:34:19'),
-(104, 'Pizza', 'asdsad', '20%', 0, '2023-05-02 22:49:00', '2023-05-02 22:49:45', 2, 1, '2023-05-02 22:50:01'),
-(105, 'Jeans', 'asdsadasfa', '20%', 0, '2023-05-02 22:53:00', '2023-05-02 22:53:24', 2, 0, NULL);
+INSERT INTO `coupon` (`id_coupon`, `id_product`, `coupon_name`, `discount`, `is_valid`, `deadline`, `create_time`, `id_creator`, `is_delete`, `delete_time`) VALUES
+(1, 2, 'coupon1', '20%', 0, '2023-05-12 22:34:00', '2023-04-29 22:18:23', 1, 0, NULL),
+(2, 4, 'coupon2', '50', 1, '2023-06-29 08:00:00', '2023-04-29 22:18:23', 2, 0, NULL),
+(3, 5, 'asdsad', '100', 1, '2023-05-17 14:42:00', '2023-04-30 14:43:00', 3, 0, NULL),
+(106, 3, 'asdsad', '20%', 1, '2023-05-25 17:15:00', '2023-05-03 17:15:23', 2, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -97,11 +92,11 @@ CREATE TABLE `order` (
   `id_order` bigint(20) NOT NULL COMMENT '主键id',
   `id_user` bigint(20) DEFAULT NULL COMMENT '用户ID',
   `id_product` bigint(20) DEFAULT NULL COMMENT 'productID',
+  `id_coupon` bigint(20) DEFAULT -1 COMMENT '用的优惠卷，没用默认为-1',
   `user_name` varchar(255) DEFAULT NULL COMMENT 'userName',
   `product_name` varchar(255) DEFAULT NULL COMMENT 'productName',
   `price` bigint(20) DEFAULT NULL COMMENT '价格',
-  `quantity` int(11) NOT NULL COMMENT '数量',
-  `coupon_name` bigint(20) DEFAULT -1 COMMENT '用的优惠卷，没用默认为-1',
+  `quantity` bigint(20) NOT NULL COMMENT '数量',
   `subtotal` bigint(20) DEFAULT NULL COMMENT '价格总量',
   `shipping_address` varchar(255) DEFAULT NULL COMMENT '地址',
   `payment_method` varchar(255) DEFAULT NULL COMMENT '付款方式',
@@ -115,28 +110,28 @@ CREATE TABLE `order` (
 -- Dumping data for table `order`
 --
 
-INSERT INTO `order` (`id_order`, `id_user`, `id_product`, `user_name`, `product_name`, `price`, `quantity`, `coupon_name`, `subtotal`, `shipping_address`, `payment_method`, `create_time`, `id_creator`, `is_delete`, `delete_time`) VALUES
-(1, 1, 1, 'John', 'Product 1', 100, 1, 1, 100, '123 Main St, Anytown USA', 'credit card', '2023-04-29 22:18:23', 1, 0, NULL),
-(2, 2, 2, 'Jane', 'Product 2', 200, 2, -1, 400, '456 Broad St, Anytown USA', 'paypal', '2023-04-29 22:18:23', 1, 0, NULL),
-(3, 3, 6, 'Amy', 'Pizza', 50, 1, -1, 50, '789 Main St, Anytown USA', 'credit card', '2023-04-30 18:30:00', 1, 0, NULL),
-(4, 4, 7, 'Bob', 'Jeans', 150, 1, -1, 150, '456 Pine St, Anytown USA', 'paypal', '2023-04-30 19:00:00', 1, 0, NULL),
-(5, 5, 1, 'David', 'Product 1', 100, 1, -1, 100, '123 Main St, Anytown USA', 'credit card', '2023-04-30 14:18:23', 1, 0, NULL),
-(6, 6, 2, 'Emily', 'Product 2', 200, 2, -1, 400, '456 Broad St, Anytown USA', 'paypal', '2023-04-30 14:18:23', 2, 0, NULL),
-(7, 1, 2, 'John', 'Product 2', 200, 1, -1, 200, '123 Main St, Anytown USA', 'credit card', '2023-04-30 13:36:11', 2, 0, NULL),
-(8, 2, 1, 'Jane', 'Product 1', 100, 1, -1, 100, '456 Broad St, Anytown USA', 'paypal', '2023-04-30 13:36:11', 2, 0, NULL),
-(9, 3, 5, 'Amy', 'test', 50, 1, -1, 50, '789 Main St, Anytown USA', 'credit card', '2023-04-30 13:36:11', 2, 0, NULL),
-(10, 4, 7, 'Bob', 'Jeans', 150, 1, -1, 150, '456 Pine St, Anytown USA', 'paypal', '2023-04-30 13:36:11', 2, 0, NULL),
-(11, 5, 10, 'David', 'Laptop', 20000, 2, -1, 40000, '123 Main St, Anytown USA', 'credit card', '2023-04-30 13:36:11', 3, 0, NULL),
-(12, 3, 7, 'Amy', 'Jeans', 150, 1, -1, 150, '123 Main St, Anytown USA', 'credit card', '2023-04-30 12:00:00', 3, 0, NULL),
-(13, 4, 1, 'Bob', 'Product 1', 100, 1, -1, 100, '456 Broad St, Anytown USA', 'paypal', '2023-04-30 12:00:00', 3, 0, NULL),
-(14, 5, 2, 'David', 'Product 2', 200, 1, -1, 200, '123 Main St, Anytown USA', 'credit card', '2023-04-30 12:00:00', 3, 0, NULL),
-(15, 6, 6, 'Emily', 'Pizza', 50, 2, -1, 100, '456 Broad St, Anytown USA', 'paypal', '2023-04-30 12:00:00', 3, 0, NULL),
-(16, 1, 5, 'John', 'test', 50, 1, -1, 50, '123 Main St, Anytown USA', 'credit card', '2023-04-30 12:00:00', 4, 0, NULL),
-(17, 2, 10, 'Jane', 'Laptop', 20000, 1, -1, 20000, '456 Broad St, Anytown USA', 'paypal', '2023-04-30 12:00:00', 4, 0, NULL),
-(18, 3, 7, 'Amy', 'Jeans', 150, 1, -1, 150, '123 Main St, Anytown USA', 'credit card', '2023-04-30 12:30:00', 4, 0, NULL),
-(19, 4, 1, 'Bob', 'Product 1', 100, 1, -1, 100, '456 Broad St, Anytown USA', 'paypal', '2023-04-30 12:30:00', 4, 0, NULL),
-(20, 5, 2, 'David', 'Product 2', 200, 1, -1, 200, '123 Main St, Anytown USA', 'credit card', '2023-04-30 12:30:00', 4, 0, NULL),
-(21, 6, 6, 'Emily', 'Pizza', 50, 2, -1, 100, '456 Broad St, Anytown USA', 'paypal', '2023-04-30 12:30:00', 5, 0, NULL);
+INSERT INTO `order` (`id_order`, `id_user`, `id_product`, `id_coupon`, `user_name`, `product_name`, `price`, `quantity`, `subtotal`, `shipping_address`, `payment_method`, `create_time`, `id_creator`, `is_delete`, `delete_time`) VALUES
+(1, 1, 1, -1, 'John', 'Product 1', 100, 1, 100, '123 Main St, Anytown USA', 'credit card', '2023-04-29 22:18:23', 1, 0, NULL),
+(2, 2, 2, -1, 'Jane', 'Product 2', 200, 2, 400, '456 Broad St, Anytown USA', 'paypal', '2023-04-29 22:18:23', 1, 0, NULL),
+(3, 3, 6, -1, 'Amy', 'Pizza', 50, 1, 50, '789 Main St, Anytown USA', 'credit card', '2023-04-30 18:30:00', 1, 0, NULL),
+(4, 4, 7, -1, 'Bob', 'Jeans', 150, 1, 150, '456 Pine St, Anytown USA', 'paypal', '2023-04-30 19:00:00', 1, 0, NULL),
+(5, 5, 1, -1, 'David', 'Product 1', 100, 1, 100, '123 Main St, Anytown USA', 'credit card', '2023-04-30 14:18:23', 1, 0, NULL),
+(6, 6, 2, -1, 'Emily', 'Product 2', 200, 2, 400, '456 Broad St, Anytown USA', 'paypal', '2023-04-30 14:18:23', 2, 0, NULL),
+(7, 1, 2, -1, 'John', 'Product 2', 200, 1, 200, '123 Main St, Anytown USA', 'credit card', '2023-04-30 13:36:11', 2, 0, NULL),
+(8, 2, 1, -1, 'Jane', 'Product 1', 100, 1, 100, '456 Broad St, Anytown USA', 'paypal', '2023-04-30 13:36:11', 2, 0, NULL),
+(9, 3, 5, -1, 'Amy', 'test', 50, 1, 50, '789 Main St, Anytown USA', 'credit card', '2023-04-30 13:36:11', 2, 0, NULL),
+(10, 4, 7, -1, 'Bob', 'Jeans', 150, 1, 150, '456 Pine St, Anytown USA', 'paypal', '2023-04-30 13:36:11', 2, 0, NULL),
+(11, 5, 10, -1, 'David', 'Laptop', 20000, 2, 40000, '123 Main St, Anytown USA', 'credit card', '2023-04-30 13:36:11', 3, 0, NULL),
+(12, 3, 7, -1, 'Amy', 'Jeans', 150, 1, 150, '123 Main St, Anytown USA', 'credit card', '2023-04-30 12:00:00', 3, 0, NULL),
+(13, 4, 1, -1, 'Bob', 'Product 1', 100, 1, 100, '456 Broad St, Anytown USA', 'paypal', '2023-04-30 12:00:00', 3, 0, NULL),
+(14, 5, 2, -1, 'David', 'Product 2', 200, 1, 200, '123 Main St, Anytown USA', 'credit card', '2023-04-30 12:00:00', 3, 0, NULL),
+(15, 6, 6, -1, 'Emily', 'Pizza', 50, 2, 100, '456 Broad St, Anytown USA', 'paypal', '2023-04-30 12:00:00', 3, 0, NULL),
+(16, 1, 5, -1, 'John', 'test', 50, 1, 50, '123 Main St, Anytown USA', 'credit card', '2023-04-30 12:00:00', 4, 0, NULL),
+(17, 2, 10, -1, 'Jane', 'Laptop', 20000, 1, 20000, '456 Broad St, Anytown USA', 'paypal', '2023-04-30 12:00:00', 4, 0, NULL),
+(18, 3, 7, -1, 'Amy', 'Jeans', 150, 1, 150, '123 Main St, Anytown USA', 'credit card', '2023-04-30 12:30:00', 4, 0, NULL),
+(19, 4, 1, -1, 'Bob', 'Product 1', 100, 1, 100, '456 Broad St, Anytown USA', 'paypal', '2023-04-30 12:30:00', 4, 0, NULL),
+(20, 5, 2, -1, 'David', 'Product 2', 200, 1, 200, '123 Main St, Anytown USA', 'credit card', '2023-04-30 12:30:00', 4, 0, NULL),
+(21, 6, 6, -1, 'Emily', 'Pizza', 50, 2, 100, '456 Broad St, Anytown USA', 'paypal', '2023-04-30 12:30:00', 5, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -281,7 +276,7 @@ ALTER TABLE `category`
 --
 ALTER TABLE `coupon`
   ADD PRIMARY KEY (`id_coupon`),
-  ADD KEY `products_id1213` (`product_name`);
+  ADD KEY `products_id1213` (`id_product`);
 
 --
 -- Indexes for table `order`
@@ -290,7 +285,7 @@ ALTER TABLE `order`
   ADD PRIMARY KEY (`id_order`),
   ADD KEY `user_product_index` (`id_user`) USING BTREE,
   ADD KEY `products_id1323` (`id_product`),
-  ADD KEY `coupons_id1323` (`coupon_name`);
+  ADD KEY `coupons_id1323` (`id_coupon`);
 
 --
 -- Indexes for table `product`
@@ -328,7 +323,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `coupon`
 --
 ALTER TABLE `coupon`
-  MODIFY `id_coupon` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id', AUTO_INCREMENT=106;
+  MODIFY `id_coupon` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id', AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT for table `order`
